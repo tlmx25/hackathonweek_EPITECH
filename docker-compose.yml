@@ -12,6 +12,8 @@ services:
         ports:
             - "8000:8000"
         command: sh -c "symfony serve --allow-http --no-tls"
+        env_file:
+            -   backend/.env
         volumes:
             - ./symfony:/var/www/html
         depends_on:
