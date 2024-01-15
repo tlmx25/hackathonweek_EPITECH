@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  database:
+    image: postgres:latest
+    env_file:
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+    volumes:
+      - ./docker/db/data:/var/lib/postgresql/data:rw

@@ -1,0 +1,3 @@
+vacation-planner:
+  path: /
+  controller: App\Controller\HomeController::index
