@@ -14,13 +14,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: DEBUG
+        run: echo ${{ env.MIRROR_URL }}
+
       - name: Push
         uses: pixta-dev/repository-mirroring-action@v1
         with:
           target_repo_url: ${{ env.MIRROR_URL }}
           ssh_private_key: ${{ secrets.GIT_SSH_PRIVATE_KEY}}
-
-      - name: Cat is good
-        run: echo ${{ env.MIRROR_URL }}
 
       
