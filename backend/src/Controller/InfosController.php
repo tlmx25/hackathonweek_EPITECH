@@ -12,10 +12,10 @@ class InfosController extends AbstractController
     #[Route('/pictures', name: 'app_pictures', methods: "GET")]
     public function index(): Response
     {
-        $api_base_url = getenv("API_BASE_URL");
+        $api_base_url = getenv();
         $data = ['message' => 'Hello, this is your API response!'];
 
         // Create a JsonResponse and return it
-        return new JsonResponse($api_base_url);
+        return new JsonResponse($data);
     }
 }
