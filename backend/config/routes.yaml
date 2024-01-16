@@ -2,14 +2,16 @@ index:
     path: /auth
     controller: App\Controller\AuthController:index
 infos:
-    path: /pictures
+    path: /infos
     controller: App\Controller\InfosController:index
 getInfoByPost:
-    path: /pictures/post/{post}
-    controller: App\Controller\InfosController:getPicturesByPost
+    path: /infos/post/{post}
+    controller: App\Controller\InfosController:getInfosByPost
 getInfoByTeam:
-    path: /pictures/team/{team}
-    controller: App\Controller\InfosController:getPicturesByTeam
+    path: /infos/team/{team}
+    controller: App\Controller\InfosController:getInfosByTeam
 getInfoByAgency:
-    path: /pictures/agency/{agency}
-    controller: App\Controller\InfosController:getPicturesByAgency
+    path: /infos/agency/{agency}
+    controller: App\Controller\InfosController:getInfosByAgency
+postMemberInformation:
+    path: /info

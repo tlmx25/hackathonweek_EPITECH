@@ -11,22 +11,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class InfosController extends AbstractController
 {
     private string $api_base_url;
-    private $dataFile;
-    private $dictionary;
+    private mixed $dataFile;
+    private array $dictionary;
 
     public function __construct()
     {
-        $this->api_base_url = getenv("API_BASE_URL");
-        $data = file_get_contents($this->api_base_url, false, stream_context_create([
-            'http' => [
-                'method' => 'GET',
-                'header' => [
-                    'Accept: application/json',
-                    'Content-type: application/json'
-                ]
-            ]
-        ]));
-        $this->dataFile = json_decode($data, true);
         $this->dictionary = [
             "pole_ai" => "Pôle AI",
             "pole_walker" => "Pôle Walker",
@@ -43,6 +32,17 @@ class InfosController extends AbstractController
             "pole_griffondor" => "Pôle Griffondor",
             "team_dev" => "Team Dev"
         ];
+        $this->api_base_url = getenv("API_BASE_URL");
+        $data = file_get_contents($this->api_base_url, false, stream_context_create([
+            'http' => [
+                'method' => 'GET',
+                'header' => [
+                    'Accept: application/json',
+                    'Content-type: application/json'
+                ]
+            ]
+        ]));
+        $this->dataFile = json_decode($data, true);
     }
 
     private function filterMembers(string $field, string $fieldToCompare)
@@ -52,26 +52,32 @@ class InfosController extends AbstractController
         });
     }
 
-    #[Route('/pictures', name: 'app_pictures', methods: "GET")]
+    #[Route('/infos', name: 'app_infos', methods: "GET")]
     public function index(): Response
     {
         return new JsonResponse($this->dataFile);
     }
 
-    #[Route('/pictures/post/{post}', name: 'app_pictures_post', methods: "GET")]
-    public function getPicturesByPost(string $post): Response
+    #[Route('/infos/post/{post}', name: 'app_infos_post', methods: "GET")]
+    public function getInfosByPost(string $post): Response
     {
         return new JsonResponse($this->filterMembers("poste", $post));
     }
 
-    #[Route('/pictures/team/{team}', name: 'app_pictures_team', methods: "GET")]
-    public function getPicturesByTeam(string $team): Response
+    #[Route('/infos/team/{team}', name: 'app_infos_team', methods: "GET")]
+    public function getInfosByTeam(string $team): Response
     {
         return new JsonResponse($this->filterMembers("equipe", $this->dictionary[$team]));
     }
 
-    #[Route('/pictures/agency/{agency}', name: 'app_pictures_agency', methods: "GET")]
-    public function getPicturesByAgency(string $agency): Response
+    #[Route('/infos/agency/{agency}', name: 'app_infos_agency', methods: "GET")]
+    public function getInfosByAgency(string $agency): Response
+    {
+        return new JsonResponse($this->filterMembers("agence", $agency));
+    }
+
+    #[Route('/infos/agency/{agency}', name: 'app_infos_create_member', methods: "POST")]
+    public function postInfosByAgency(string $agency): Response
     {
         return new JsonResponse($this->filterMembers("agence", $agency));
     }
