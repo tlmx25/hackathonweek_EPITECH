@@ -2,7 +2,6 @@
     <div class="row row-cols-1 row-cols-md-4 g-4">
       <div v-for="index in 10" :key="index" class="col">
         <div class="card text-center position-relative" style="border: 0;" @mouseover="showInfo(index)" @mouseleave="hideInfo(index)">
-        <!-- <div class="card text-center position-relative" @mouseover="showInfo(index)" @mouseleave="hideInfo(index)"> -->
           <img v-if="hoveredIndex !== index" src="@/assets/test_before.jpg" class="card-img-top" alt="...">
           <img v-else src="@/assets/test_after.jpg" class="card-img-top" alt="...">
           <div class="card-overlay"  v-if="hoveredIndex === index">
