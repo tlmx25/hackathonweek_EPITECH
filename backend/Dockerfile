@@ -14,11 +14,14 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
 RUN apt install symfony-cli
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 WORKDIR /app
 
 COPY . .
 
+RUN composer update
+RUN composer require nelmio/cors-bundle
 EXPOSE 8000
 
 CMD ["synfony", "server:start", "--no-tls", "--port=8080"]
