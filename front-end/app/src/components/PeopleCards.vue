@@ -60,7 +60,8 @@ export default {
     /* background: #C5C2FF; */
     /* background: #D0FFE9; */
     background: #151F2A;
-    color: #D0FFE9;
+    /* color: #D0FFE9; */
+    color: #FFFFFF;
     display: flex;
     flex-direction: column;
     justify-content: center;
