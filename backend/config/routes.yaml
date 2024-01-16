@@ -1,3 +1,17 @@
 index:
-    path: /
-    controller: App\Controller\ConferenceController:index
+    path: /auth
+    controller: App\Controller\AuthController:index
+infos:
+    path: /infos
+    controller: App\Controller\InfosController:index
+getInfoByPost:
+    path: /infos/post/{post}
+    controller: App\Controller\InfosController:getInfosByPost
+getInfoByTeam:
+    path: /infos/team/{team}
+    controller: App\Controller\InfosController:getInfosByTeam
+getInfoByAgency:
+    path: /infos/agency/{agency}
+    controller: App\Controller\InfosController:getInfosByAgency
+postMemberInformation:
+    path: /info

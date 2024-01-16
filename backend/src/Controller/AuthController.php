@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ConferenceController extends AbstractController
+class AuthController extends AbstractController
 {
-    #[Route('/auth', name: 'app_conference')]
+    #[Route('/auth', name: 'app_conference', methods: "POST")]
     public function index(): Response
     {
         $data = ['message' => 'Hello, this is your API response!'];
