@@ -21,7 +21,6 @@ WORKDIR /app
 COPY . .
 
 RUN composer update
-RUN composer require nelmio/cors-bundle
 
 EXPOSE 8000
 
