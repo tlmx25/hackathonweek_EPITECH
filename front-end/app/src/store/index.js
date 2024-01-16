@@ -2,13 +2,11 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-  },
-  getters: {
+    selectedElement: "Home",
   },
   mutations: {
+    setSelectedElement(state, elem) {
+      state.selectedElement = elem;
+    },
   },
-  actions: {
-  },
-  modules: {
-  }
-})
+});
