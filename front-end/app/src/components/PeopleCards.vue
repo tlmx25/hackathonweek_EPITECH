@@ -2,8 +2,8 @@
     <div class="row row-cols-1 row-cols-md-4 g-4">
       <div v-for="user in this.users" :key="user.nom" class="col">
         <div class="card text-center position-relative" style="border: 0;" @mouseover="showInfo(user)" @mouseleave="hideInfo(user)">
-          <img v-if="hoveredIndex !== user" :src="user.photo_pro" class="card-img-top" alt="...">
-          <img v-else :src="user.photo_fun" class="card-img-top" alt="...">
+          <img v-if="hoveredIndex !== user" :src="user.photo_pro ? user.photo_pro : noPicture" class="card-img-top" alt="...">
+          <img v-else :src="user.photo_fun ? user.photo_fun : noPicture" class="card-img-top" alt="...">
           <div class="card-overlay"  v-if="hoveredIndex === user">
             <p class="card-title" style="font-weight: bold;">{{ user.nom }} {{ user.prenom }}</p>
             <p class="card-text">{{ user.poste }}</p>
@@ -21,6 +21,7 @@ export default {
     return {
       hoveredIndex: null,
       users: [],
+      noPicture: require('@/assets/no_pic.png'),
     };
   },
   mounted() {
