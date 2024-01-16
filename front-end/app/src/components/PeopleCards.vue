@@ -1,12 +1,12 @@
 <template>
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div v-for="index in 10" :key="index" class="col">
-        <div class="card text-center position-relative" style="border: 0;" @mouseover="showInfo(index)" @mouseleave="hideInfo(index)">
-          <img v-if="hoveredIndex !== index" src="@/assets/test_before.jpg" class="card-img-top" alt="...">
-          <img v-else src="@/assets/test_after.jpg" class="card-img-top" alt="...">
-          <div class="card-overlay"  v-if="hoveredIndex === index">
-            <p class="card-title" style="font-weight: bold;">Nom Prénom</p>
-            <p class="card-text">Poste</p>
+      <div v-for="user in this.users" :key="user.nom" class="col">
+        <div class="card text-center position-relative" style="border: 0;" @mouseover="showInfo(user)" @mouseleave="hideInfo(user)">
+          <img v-if="hoveredIndex !== user" :src="user.photo_pro" class="card-img-top" alt="...">
+          <img v-else :src="user.photo_fun" class="card-img-top" alt="...">
+          <div class="card-overlay"  v-if="hoveredIndex === user">
+            <p class="card-title" style="font-weight: bold;">{{ user.nom }} {{ user.prenom }}</p>
+            <p class="card-text">{{ user.poste }}</p>
           </div>
         </div>
       </div>
@@ -14,26 +14,22 @@
 </template>
 
 <script>
-import axios from "axios";
+import { fetchData } from "@/services/api";
 
 export default {
   data() {
     return {
       hoveredIndex: null,
+      users: [],
     };
   },
   mounted() {
-    this.fetchData();
+    this.getData();
   },
   methods: {
-    async fetchData() {
-      try {
-        const response = await axios.get('http://localhost:8000/infos/');
-
-        console.log(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la requête GET :', error);
-      }
+    async getData() {
+      this.users = await fetchData('/infos');
+      console.log(this.users);
     },
     showInfo(index) {
       this.hoveredIndex = index;
