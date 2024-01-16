@@ -4,3 +4,12 @@ index:
 infos:
     path: /pictures
     controller: App\Controller\InfosController:index
+getInfoByPost:
+    path: /pictures/post/{post}
+    controller: App\Controller\InfosController:getPicturesByPost
+getInfoByTeam:
+    path: /pictures/team/{team}
+    controller: App\Controller\InfosController:getPicturesByTeam
+getInfoByAgency:
+    path: /pictures/agency/{agency}
+    controller: App\Controller\InfosController:getPicturesByAgency
