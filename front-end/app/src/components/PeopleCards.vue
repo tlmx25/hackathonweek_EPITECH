@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from "axios";
 
 export default {
   data() {
@@ -21,7 +22,19 @@ export default {
       hoveredIndex: null,
     };
   },
+  mounted() {
+    this.fetchData();
+  },
   methods: {
+    async fetchData() {
+      try {
+        const response = await axios.get('http://localhost:8000/infos/');
+
+        console.log(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la requête GET :', error);
+      }
+    },
     showInfo(index) {
       this.hoveredIndex = index;
     },
@@ -29,7 +42,7 @@ export default {
       this.hoveredIndex = null;
     },
   },
-};
+}
 </script>
 
 <style scoped>
