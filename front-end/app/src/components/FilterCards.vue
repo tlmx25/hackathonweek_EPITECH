@@ -1,6 +1,6 @@
 <template>
     <div class="mb-4">
-        <label class="mb-2">Sélectionnez une ville</label>
+        <label class="mb-2" style="font-weight: bold;">Sélectionnez une ville</label>
         <div class="row">
             <div class="col">
                 <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
@@ -17,7 +17,7 @@
         </div>
     </div>
     <div>
-        <label class="mb-2">Sélectionnez une équipe</label>
+        <label class="mb-2" style="font-weight: bold;">Sélectionnez une équipe</label>
         <div class="row">
             <div class="col">
                 <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
