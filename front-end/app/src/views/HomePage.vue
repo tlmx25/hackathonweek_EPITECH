@@ -46,10 +46,14 @@ export default {
         this.filteredUsers = [...this.users];
       },
       updateFilters(filters) {
-        if (filters.teams.length === 0) {
+        if (filters.teams.length === 0 && (filters.cities.length === 0 || filters.cities.length === 2)) {
             this.filteredUsers = [...this.users];
         } else {
-            this.filteredUsers = this.users.filter(user => filters.teams.some(team => team === user.equipe));
+            this.filteredUsers = this.users.filter(user => {
+                const teams = filters.teams.length === 0 || filters.teams.some(team => team === user.equipe || team + ' ' === user.equipe);
+                const cities = filters.cities.length === 0 || filters.cities.some(city => city === user.agence);
+                return teams && cities;
+            });
         }
       }
     }

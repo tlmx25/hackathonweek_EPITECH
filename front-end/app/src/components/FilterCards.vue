@@ -4,13 +4,9 @@
         <div class="row">
             <div class="col">
                 <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                    <div>
-                        <input type="checkbox" class="btn-check" id="btncheckRennes" autocomplete="off">
-                        <label class="btn btn-outline-dark mb-2" for="btncheckRennes">Rennes</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" class="btn-check" id="btncheckAngers" autocomplete="off">
-                        <label class="btn btn-outline-dark mb-2" for="btncheckAngers">Angers</label>
+                    <div v-for="(city, index) in cities" :key="index">
+                        <input type="checkbox" class="btn-check" :id="'btncheckCity' + index" autocomplete="off" :value="index" v-model="selectedCities" @change="updateFilters">
+                        <label class="btn btn-outline-dark mb-2" :for="'btncheckCity' + index">{{ city }}</label>
                     </div>
                 </div>
             </div>
@@ -39,6 +35,8 @@ export default {
     data() {
         return {
             selectedTeams: [],
+            selectedCities: [],
+            cities: ['Rennes', 'Angers'],
         };
     },
     props: {
@@ -50,8 +48,10 @@ export default {
     methods: {
         updateFilters() {
             const selected = this.selectedTeams.map(index => this.teams[index]);
+            const selectCities = this.selectedCities.map(index => this.cities[index]);
             this.$emit('filterChange', {
                 teams: selected,
+                cities: selectCities,
             });
         },
     },
