@@ -3,7 +3,7 @@
         <IntroText />
         <div class="row">
             <div class="col-md-3">
-                <SearchBar />
+                <SearchBar @searchChange="updateSearch"/>
                 <FilterCards :teams="teams" @filterChange="updateFilters"/>
             </div>
             <div class="col">
@@ -44,6 +44,13 @@ export default {
       async getData() {
         this.users = await fetchData('/infos');
         this.filteredUsers = [...this.users];
+      },
+      updateSearch(search) {
+        console.log(search.search);
+        if (search) {
+            this.filteredUsers = this.filteredUsers.filter(user => user.nom.toLowerCase().includes(search.search.toLowerCase()) ||
+                user.prenom.toLowerCase().includes(search.search.toLowerCase()));
+        }
       },
       updateFilters(filters) {
         if (filters.teams.length === 0 && (filters.cities.length === 0 || filters.cities.length === 2)) {
