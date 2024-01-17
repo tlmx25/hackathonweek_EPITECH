@@ -32,6 +32,7 @@ export default {
     data() {
         return {
             users: [],
+            images: [],
             filteredUsers: [],
             teams: ['Pôle AI', 'Pôle Walker', 'Team IT', 'Team Rocket', 'Pôle Cousteau', 'Pôle 8.6', 'Pôle Position',
                 'Bug Buster', 'Team Elephant', 'Team Eden', 'Studio Design', 'Pôle Passe Partout', 'Team Dev', 'Pôle Griffondor'],
@@ -42,7 +43,7 @@ export default {
     },
     methods: {
       async getData() {
-        this.users = await fetchData('/infos');
+        this.users = await fetchData('https://6tm-hackatlhon.b-cdn.net/data.json');
         this.filteredUsers = [...this.users];
       },
       updateSearch(search) {
