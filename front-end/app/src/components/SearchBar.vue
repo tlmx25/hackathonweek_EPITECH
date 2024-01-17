@@ -2,7 +2,7 @@
     <div class="mb-4">
         <label class="mb-2" for="search" style="font-weight: bold;">Vous cherchez quelqu'un ?</label>
         <div class="input-group mb-3">
-            <input v-model="searchInput" type="text" class="form-control" placeholder="Nom Prénom" aria-label="Nom Prénom" aria-describedby="button-addon2">
+            <input v-model="searchInput" type="text" class="form-control" placeholder="Nom Prénom" aria-label="Nom Prénom" aria-describedby="button-addon2" @keydown.enter="startSearch">
             <button @click="startSearch" class="btn btn-dark" type="button" id="button-addon2">
                 <span class="material-icons" style="vertical-align: middle;">
                     search
