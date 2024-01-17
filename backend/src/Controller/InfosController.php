@@ -80,15 +80,14 @@ class InfosController extends AbstractController
         return new JsonResponse($this->utils->filterMembers($this->dataFile ,"equipe", $this->dictionary[$team]));
     }
 
+    #[Route('/infos/agencies', name: 'app_infos_agency', methods: "GET")]
+    public function getInfosAgencies(): Response
+    {
+        return new JsonResponse($this->utils->getUniqueData($this->dataFile ,"agence"));
+    }
     #[Route('/infos/agency/{agency}', name: 'app_infos_agency', methods: "GET")]
     public function getInfosByAgency(string $agency): Response
     {
         return new JsonResponse($this->utils->filterMembers($this->dataFile ,"agence", $agency));
-    }
-
-    #[Route('/infos/agency', name: 'app_infos_agency', methods: "GET")]
-    public function getInfosAgency(): Response
-    {
-        return new JsonResponse($this->utils->getUniqueData($this->dataFile ,"agence"));
     }
 }
