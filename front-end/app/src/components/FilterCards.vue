@@ -35,6 +35,7 @@
 
 export default {
     name: 'FilterCards',
+    emits: ['filterChange'],
     data() {
         return {
             selectedTeams: [],
