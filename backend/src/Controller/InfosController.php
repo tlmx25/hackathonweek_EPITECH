@@ -67,7 +67,7 @@ class InfosController extends AbstractController
         $employee->setProImage($this->dataFile[0]["photo_pro"]);
         $employee->setFunImage($this->dataFile[0]["photo_fun"]);
         $this->employeeRepository->save($employee);*/
-        $this->employeeRepository->deleteEmployeeById(2);
+        // $this->employeeRepository->deleteEmployeeById(2);
         return new JsonResponse($this->dataFile);
     }
 
