@@ -7,7 +7,7 @@
                 <FilterCards :teams="teams" @filterChange="updateFilters"/>
             </div>
             <div class="col">
-                <PeopleCards class="mt-5 mb-5" :users="users"/>
+                <PeopleCards class="mt-5 mb-5" :users="filteredUsers"/>
             </div>
         </div>
     </div>
@@ -44,12 +44,13 @@ export default {
       async getData() {
         this.users = await fetchData('/infos');
         this.filteredUsers = [...this.users];
-        console.log(this.users);
-        console.log(this.teams);
       },
       updateFilters(filters) {
-        // this.filteredUsers = this.filteredUsers.filter(user => filters.teams.includes(user.team));
-        console.log(filters);
+        if (filters.teams.length === 0) {
+            this.filteredUsers = [...this.users];
+        } else {
+            this.filteredUsers = this.users.filter(user => filters.teams.some(team => team === user.equipe));
+        }
       }
     }
 }
