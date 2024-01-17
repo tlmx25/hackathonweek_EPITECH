@@ -21,12 +21,26 @@
         <div class="row">
             <div class="col">
                 <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
-                    <div v-for="index in 10" :key="index">
-                        <input type="checkbox" class="btn-check" :id="'btncheck' + index" autocomplete="off">
-                        <label class="btn btn-outline-dark mb-2" :for="'btncheck' + index">Test</label>
+                    <div v-for="team in teams" :key="team">
+                        <input type="checkbox" class="btn-check" :id="'btncheck' + team" autocomplete="off">
+                        <label class="btn btn-outline-dark mb-2" :for="'btncheck' + team">{{ team }}</label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+
+export default {
+    name: 'FilterCards',
+    props: {
+        teams: {
+            type: Array,
+            required: true,
+        },
+    },
+}
+
+</script>

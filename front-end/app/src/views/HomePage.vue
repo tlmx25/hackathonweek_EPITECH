@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-3">
                 <SearchBar />
-                <FilterCards />
+                <FilterCards :teams="teams"/>
             </div>
             <div class="col">
                 <PeopleCards class="mt-5 mb-5" :users="users"/>
@@ -32,6 +32,8 @@ export default {
     data() {
         return {
             users: [],
+            teams: ['Pôle AI', 'Pôle Walker', 'Team IT', 'Team Rocket', 'Pôle Cousteau', 'Pôle 8.6', 'Pôle Position',
+                'Bug Buster', 'Team Elephant', 'Team Eden', 'Studio Design', 'Pôle Passe Partout', 'Team Dev', 'Pôle Griffondor'],
         };
     },
     mounted() {
@@ -41,6 +43,7 @@ export default {
       async getData() {
       this.users = await fetchData('/infos');
       console.log(this.users);
+      console.log(this.teams);
       },
     }
 }
