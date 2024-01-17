@@ -6,7 +6,7 @@
                 <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                     <div v-for="(city, index) in cities" :key="index">
                         <input type="checkbox" class="btn-check" :id="'btncheckCity' + index" autocomplete="off" :value="index" v-model="selectedCities" @change="updateFilters">
-                        <label class="btn btn-outline-dark mb-2" :for="'btncheckCity' + index" style="margin-right: 20px;">{{ city }}</label>
+                        <label class="btn btn-outline-dark mb-2" :for="'btncheckCity' + index" style="margin-right: 1rem;">{{ city }}</label>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
                     <div v-for="(team, index) in teams" :key="index">
                         <input type="checkbox" class="btn-check" :id="'btncheck' + index" autocomplete="off" :value="index" v-model="selectedTeams" @change="updateFilters">
-                        <label class="btn btn-outline-dark mb-2" :for="'btncheck' + index">{{ team }}</label>
+                        <label class="btn btn-outline-dark mb-3" :for="'btncheck' + index">{{ team }}</label>
                     </div>
                 </div>
             </div>
