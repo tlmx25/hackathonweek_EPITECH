@@ -45,23 +45,28 @@ class InfosController extends AbstractController
         $this->dataFile = json_decode($data, true);
     }
 
-    private function filterMembers(string $field, string $fieldToCompare)
-    {
-        return array_filter($this->dataFile, function ($element) use ($field, $fieldToCompare) {
-            return trim($element[$field]) == trim($fieldToCompare);
-        });
-    }
-
     #[Route('/infos', name: 'app_infos', methods: "GET")]
     public function index(): Response
     {
         return new JsonResponse($this->dataFile);
     }
 
+    #[Route('/infos/posts', name: 'app_infos_posts', methods: "GET")]
+    public function getInfosPosts(): Response
+    {
+        return new JsonResponse($this->getUniqueData("poste"));
+    }
+
     #[Route('/infos/post/{post}', name: 'app_infos_post', methods: "GET")]
     public function getInfosByPost(string $post): Response
     {
         return new JsonResponse($this->filterMembers("poste", $post));
+    }
+
+    #[Route('/infos/teams', name: 'app_infos_create_member', methods: "GET")]
+    public function getInfosTeams(): Response
+    {
+        return new JsonResponse($this->getUniqueData("equipe"));
     }
 
     #[Route('/infos/team/{team}', name: 'app_infos_team', methods: "GET")]
@@ -76,9 +81,9 @@ class InfosController extends AbstractController
         return new JsonResponse($this->filterMembers("agence", $agency));
     }
 
-    #[Route('/infos/agency/{agency}', name: 'app_infos_create_member', methods: "POST")]
-    public function postInfosByAgency(string $agency): Response
+    #[Route('/infos/agency', name: 'app_infos_agency', methods: "GET")]
+    public function getInfosAgency(): Response
     {
-        return new JsonResponse($this->filterMembers("agence", $agency));
+        return new JsonResponse($this->getUniqueData("agence"));
     }
 }
