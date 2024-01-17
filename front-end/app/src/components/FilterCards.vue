@@ -6,7 +6,7 @@
                 <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                     <div v-for="(city, index) in cities" :key="index">
                         <input type="checkbox" class="btn-check" :id="'btncheckCity' + index" autocomplete="off" :value="index" v-model="selectedCities" @change="updateFilters">
-                        <label class="btn btn-outline-dark mb-2" :for="'btncheckCity' + index">{{ city }}</label>
+                        <label class="btn btn-outline-dark mb-2" :for="'btncheckCity' + index" style="margin-right: 20px;">{{ city }}</label>
                     </div>
                 </div>
             </div>
