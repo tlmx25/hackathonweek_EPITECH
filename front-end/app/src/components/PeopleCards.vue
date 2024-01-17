@@ -14,24 +14,21 @@
 </template>
 
 <script>
-import { fetchData } from "@/services/api";
 
 export default {
+  props: {
+    users: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       hoveredIndex: null,
-      users: [],
       noPicture: require('@/assets/no_pic.png'),
     };
   },
-  mounted() {
-    this.getData();
-  },
   methods: {
-    async getData() {
-      this.users = await fetchData('/infos');
-      console.log(this.users);
-    },
     showInfo(index) {
       this.hoveredIndex = index;
     },
