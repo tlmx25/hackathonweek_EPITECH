@@ -12,13 +12,13 @@ class Utils {
 
     public function getUniqueData(array $data, $field): array
     {
-        $equipes = array();
+        $uniqueElement = array();
 
         foreach ($data as $item) {
             if (isset($item[$field])) {
-                $equipes[$item[$field]] = true;
+                $uniqueElement[$item[$field]] = true;
             }
         }
-        return array_keys($equipes);
+        return array_keys($uniqueElement);
     }
 }
