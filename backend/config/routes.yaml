@@ -1,0 +1,26 @@
+index:
+    path: /auth
+    controller: App\Controller\AuthController:index
+infos:
+    path: /infos
+    controller: App\Controller\InfosController:index
+getPosts:
+    path: /infos/posts
+    controller: App\Controller\InfosController:getInfosPosts
+getInfoByPost:
+    path: /infos/post/{post}
+    controller: App\Controller\InfosController:getInfosByPost
+getTeams:
+    path: /infos/teams
+    controller: App\Controller\InfosController:getInfosTeams
+getInfoByTeam:
+    path: /infos/team/{team}
+    controller: App\Controller\InfosController:getInfosByTeam
+getAgencies:
+    path: /infos/agencies
+    controller: App\Controller\InfosController:getInfosAgencies
+getInfoByAgency:
+    path: /infos/agency/{agency}
+    controller: App\Controller\InfosController:getInfosByAgency
+postMemberInformation:
+    path: /info

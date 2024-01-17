@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+    # Service pour le serveur web
+    web:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        image: ubuntu:latest
+        container_name: backend_web
+        restart: unless-stopped
+        ports:
+            - "8000:8000"
+        command: sh -c "symfony serve --allow-http --no-tls"
+        env_file:
+            -   backend/.env
+        volumes:
+            - ./symfony:/var/www/html
+        depends_on:
+            - php
+    database:
+        container_name: backend_database
+        image: postgres:12.8
+        env_file:
+            - ./backend/.env
+        ports:
+            - '5432:5432'
+        volumes:
+            - db:/var/lib/postgresql/data
+        restart: always
+    # Service pour PHP-FPM
+    php:
+        image: php:8.1.27-fpm
+        container_name: backend_php
+        restart: unless-stopped
+        volumes:
+            - ./symfony:/var/www/html
+
+networks:
+    mon_projet_net:
+        driver: bridge
+
+volumes:
+    db_data:
+    db:
