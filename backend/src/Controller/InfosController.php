@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Employee;
+use App\Repository\EmployeeRepository;
 use App\Utils\Utils;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,8 +18,11 @@ class InfosController extends AbstractController
     private array $dictionary;
     private Utils $utils;
 
+    private EmployeeRepository $employeeRepository;
+
     public function __construct(
-        Utils $utils
+        Utils $utils,
+        EmployeeRepository $employeeRepository
     )
     {
         $this->dictionary = [
@@ -48,11 +53,21 @@ class InfosController extends AbstractController
         ]));
         $this->dataFile = json_decode($data, true);
         $this->utils = $utils;
+        $this->employeeRepository = $employeeRepository;
     }
 
     #[Route('/infos', name: 'app_infos', methods: "GET")]
     public function index(): Response
     {
+        /*$employee = new Employee();
+        $employee->setName($this->dataFile[0]["nom"]);
+        $employee->setJob($this->dataFile[0]["poste"]);
+        $employee->setTeam($this->dataFile[0]["equipe"]);
+        $employee->setAgency($this->dataFile[0]["agence"]);
+        $employee->setProImage($this->dataFile[0]["photo_pro"]);
+        $employee->setFunImage($this->dataFile[0]["photo_fun"]);
+        $this->employeeRepository->save($employee);*/
+        $this->employeeRepository->deleteEmployeeById(2);
         return new JsonResponse($this->dataFile);
     }
 

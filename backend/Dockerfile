@@ -6,7 +6,9 @@ RUN apt update \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
     && docker-php-ext-configure zip \
-    && docker-php-ext-install zip
+    && docker-php-ext-install zip \
+    && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql
 
 WORKDIR /var/www/symfony_docker
 
@@ -24,4 +26,4 @@ RUN composer update
 
 EXPOSE 8000
 
-CMD ["synfony", "server:start", "--no-tls", "--port=8080"]
+CMD ["symfony", "server:start", "--no-tls", "--port=8080"]
