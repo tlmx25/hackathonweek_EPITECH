@@ -1,0 +1,14 @@
+{
+  "apiKey": "AIzaSyBkecZJqCzjx8upUwL3iozWq7P2i7lDMFM",
+  "type": "service_account",
+  "project_id": "hackthlon-week-epitech-6tm",
+  "private_key_id": "261694420ec35241aafa6836ba4e3da9d053c389",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCmWFsSUaKkp9Vr\neP0YAHFY9Q/DNyKckRh5J1sb/sC8hQjC1qWLlsClj9cpW1IxoKmo8MKFilj27oMO\nxpjIjj6/hgQxbaFPMmXAx5d1Tgnd+81OyiGRivzrZjbm2GUp1MypJ+llNmS+ifyu\nMYF+QmOdSviqFNHnUEy6BxqjGExEoOP/5tyFsMPV02QzYII7F0zYXieInhiRs09u\nXn0g/PYlzWpVYEqR8wWg0oKGtMnQZvGlSGglrU2Rs4CTQuxrAG2IEFvUjQeXZ0vA\nmnnhGR8/OiZD/ep2k/u7jfY4q32A4Nj5bw1qa4MH4aLL6QRioDftXcBvCNwgOJzO\nbZcbYNL5AgMBAAECggEALPHnnYIAM4QDhrfYjqEj/xiryx+9EtejaKzJEb3Z/rXl\nQZu0fAxd/f3o8Uwy36Tc4oA21tUkJ4gXUik3w8ynSKFhxacs9BSWaKmlEzVkNh3g\ngb7cphILN2FVSTdD0jMknzng9o9lVhQ7eSd4KRCwEKJeoLniYyEPsh3URSf+B3aP\ncOM/ALAsDI7W9K98YIbBM0QdmmNpLEgpOgt1saY0NhpwytaTTU5sdbgglvBE7UPE\nZHdWbrgdjZaVUhSy3Zi+1cMMn9wNE0ndbjibhRhE13HmBld/Ccus+ndg3qRgWLnh\nm4Fb0AjOXoJvReWhWf7M0yudangKBNA4JZCUjQAO9wKBgQDf8UeQ3cfYD/uBopdM\nAIj73nG7bpysytO7HCkmsFR/rQ4dlhQGzN7jWh+Ul//vXLksj85tTlMUtoAakTMS\ntE66ixVszqpv67/mPsLw51VBaEjbeKxSYa+vZv0mqbwlEzwZ+HAkunPoMuQuu7Nh\n9N67p1dp+Oqbu09BVZ/wWfRnBwKBgQC+KFTi22HLNkVckbC+AL1oPqfNpNg3nNdy\ndaIF56nf1pJtImze7PoksD37Jw4kg+7cZIZdJiaDHMp4Q9srWyvp51FeDiM7OCgV\na6oDY35JA73lvhNfSinN3yAEuWY2WBWqhQ4ZSzpiP9alc42f1PS7PfkWJcXwsazy\n3PHZtWh1/wKBgCjt5lCZ2E6rDSKyXsirSF4QV+UT4FrMb0pBaVwC2k7DiFLr/RkJ\nFKuk6ySzazmKTuXQGsBrkk+001EHvLfscH8zsGTEmO3/voEMc4CoJzLfJoHGWmhs\nJjn+rsIEP7je/RsaBxUPZuPHeWD5OV3r7VGK0jUyI173KxMb3TGGn169AoGAI3Qr\nl3xluFivB/pV5KcIqXX9HVddxMimVr3d7pHp10UPWe+wMsQmQ07kz33RojdDAq5v\natChH5LvoQqtw2ClSGALiKjEItduicfgE++p7P0Ym8wbmomeT7cJJjhW+UzlBTz3\nivm+sfDLGV/5CNLQqlR8q4dxZ1YJM+LD6N5s0osCgYBKV47E9oESs/QaKdnghUuz\nkJr6rbv428PlWBokGIGdpOSETagFAJS4CjFKHRID3WVU6FxGSJg/GQNm/Olbt9tQ\nJjd2Bcug/BHQ3sxvAyVE4DLvJ+p9NFHQCTrfChv/n5E2wWStz7iy6L+mEZTBKY8d\nzTGotsuCkmaHWexG3EWn2w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "hackthlon-week-epitech-6tm@appspot.gserviceaccount.com",
+  "client_id": "112121704161213534772",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hackthlon-week-epitech-6tm%40appspot.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
