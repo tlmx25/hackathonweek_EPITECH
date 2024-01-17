@@ -36,7 +36,6 @@ services:
         volumes:
             - ./symfony:/var/www/html
 
-
 networks:
     mon_projet_net:
         driver: bridge
