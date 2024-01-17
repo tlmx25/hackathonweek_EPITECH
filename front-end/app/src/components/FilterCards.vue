@@ -21,9 +21,9 @@
         <div class="row">
             <div class="col">
                 <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
-                    <div v-for="team in teams" :key="team">
-                        <input type="checkbox" class="btn-check" :id="'btncheck' + team" autocomplete="off">
-                        <label class="btn btn-outline-dark mb-2" :for="'btncheck' + team">{{ team }}</label>
+                    <div v-for="(team, index) in teams" :key="index">
+                        <input type="checkbox" class="btn-check" :id="'btncheck' + index" autocomplete="off" :value="index" v-model="selectedTeams" @change="updateFilters">
+                        <label class="btn btn-outline-dark mb-2" :for="'btncheck' + index">{{ team }}</label>
                     </div>
                 </div>
             </div>
@@ -35,10 +35,23 @@
 
 export default {
     name: 'FilterCards',
+    data() {
+        return {
+            selectedTeams: [],
+        };
+    },
     props: {
         teams: {
             type: Array,
             required: true,
+        },
+    },
+    methods: {
+        updateFilters() {
+            const selected = this.selectedTeams.map(index => this.teams[index]);
+            this.$emit('filterChange', {
+                teams: selected,
+            });
         },
     },
 }

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-3">
                 <SearchBar />
-                <FilterCards :teams="teams"/>
+                <FilterCards :teams="teams" @filterChange="updateFilters"/>
             </div>
             <div class="col">
                 <PeopleCards class="mt-5 mb-5" :users="users"/>
@@ -32,6 +32,7 @@ export default {
     data() {
         return {
             users: [],
+            filteredUsers: [],
             teams: ['Pôle AI', 'Pôle Walker', 'Team IT', 'Team Rocket', 'Pôle Cousteau', 'Pôle 8.6', 'Pôle Position',
                 'Bug Buster', 'Team Elephant', 'Team Eden', 'Studio Design', 'Pôle Passe Partout', 'Team Dev', 'Pôle Griffondor'],
         };
@@ -41,10 +42,15 @@ export default {
     },
     methods: {
       async getData() {
-      this.users = await fetchData('/infos');
-      console.log(this.users);
-      console.log(this.teams);
+        this.users = await fetchData('/infos');
+        this.filteredUsers = [...this.users];
+        console.log(this.users);
+        console.log(this.teams);
       },
+      updateFilters(filters) {
+        // this.filteredUsers = this.filteredUsers.filter(user => filters.teams.includes(user.team));
+        console.log(filters);
+      }
     }
 }
 
