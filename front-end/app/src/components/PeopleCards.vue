@@ -1,5 +1,5 @@
 <template>
-    <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
       <div v-for="(user, index) in this.users" :key="generateKey(user, index)" class="col">
         <div class="card text-center position-relative" style="border: 0;" @mouseover="showInfo(index)" @mouseleave="hideInfo()">
           <img v-if="hoveredIndex !== index" :src="user.photo_pro ? user.photo_pro : noPicture" class="card-img-top" alt="...">

@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <IntroText />
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" style="margin-top: 4rem;">
                 <SearchBar @searchChange="updateSearch"/>
                 <FilterCards :teams="teams" @filterChange="updateFilters"/>
             </div>
@@ -51,6 +51,7 @@ export default {
                 user.prenom.toLowerCase().includes(search.search.toLowerCase()));
         } else {
             this.filteredUsers = [...this.users];
+            // TODO : if other filters applied ???
         }
       },
       updateFilters(filters) {
@@ -58,6 +59,7 @@ export default {
             this.filteredUsers = [...this.users];
         } else {
             this.filteredUsers = this.users.filter(user => {
+                // team + ' ' to check the ones that have a space at the end
                 const teams = filters.teams.length === 0 || filters.teams.some(team => team === user.equipe || team + ' ' === user.equipe);
                 const cities = filters.cities.length === 0 || filters.cities.some(city => city === user.agence);
                 return teams && cities;
