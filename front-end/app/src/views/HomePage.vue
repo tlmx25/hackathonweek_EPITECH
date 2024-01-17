@@ -46,7 +46,6 @@ export default {
         this.filteredUsers = [...this.users];
       },
       updateSearch(search) {
-        console.log(search.search);
         if (search) {
             this.filteredUsers = this.filteredUsers.filter(user => user.nom.toLowerCase().includes(search.search.toLowerCase()) ||
                 user.prenom.toLowerCase().includes(search.search.toLowerCase()));

@@ -69,8 +69,4 @@ export default {
     margin: 0 !important;
 }
 
-/* .card:hover .card-overlay {
-  opacity: 1;
-} */
-
 </style>
