@@ -3,7 +3,6 @@
       <div v-for="(user, index) in this.users" :key="generateKey(user, index)" class="col">
         <div 
           class="card text-center position-relative"
-          :class="{ flip: flippedUsers[index] }"
           @mouseover="showInfo(index)" 
           @mouseleave="hideInfo()"
           @click="flipCard(index)"
@@ -31,7 +30,6 @@ export default {
   data() {
     return {
       hoveredIndex: null,
-      flippedUsers: this.users.map(() => false),
       noPicture: require('@/assets/no_pic.png'),
     };
   },
@@ -45,9 +43,6 @@ export default {
     hideInfo() {
       this.hoveredIndex = null;
     },
-    flipCard(index) {
-      this.flippedUsers[index] = !this.flippedUsers[index];
-    },
   },
 }
 </script>
@@ -60,12 +55,12 @@ export default {
 }
 
 .card:hover {
-    transform: translateY(-10px);
-  }
+    transform: scale(1.05);
+}
 
 .card-overlay {
     position: absolute;
-    height: 15%;
+    height: 20%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -89,9 +84,5 @@ export default {
 .card-title {
     margin: 0 !important;
 }
-
-.card.flip {
-    transform: rotateY(180deg);
-  }
 
 </style>
