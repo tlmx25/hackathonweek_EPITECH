@@ -1,16 +1,17 @@
 <template>
-    <RouterView />
+  <div id="app">
+    <NavBar />
+  </div>
+  <Router-View />
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue'
 
 export default {
+  name: 'App',
   components: {
-  },
-  methods: {
-    handleElementSelected(elem) {
-      console.log("Élément sélectionné :", elem);
-    },
+    NavBar,
   },
 };
 </script>
