@@ -31,4 +31,6 @@ deleteUser:
 getAllUsers:
     path: /auth/users
     controller: App\Controller\AuthController:getAllUser
-
+initDb:
+    path: /init
+    controller: App\Controller\DbController:index
