@@ -35,6 +35,16 @@ services:
         depends_on:
             - php
 
+    front:
+        build:
+            context: ./front-end/app
+            dockerfile: Dockerfile
+
+        container_name: front_web
+        restart: unless-stopped
+        ports:
+            - "8080:8080"
+
 networks:
     mon_projet_net:
         driver: bridge
