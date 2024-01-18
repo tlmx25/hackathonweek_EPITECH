@@ -1,3 +1,13 @@
 <template>
-  <h1>Hello world</h1>
+  <Router-View />
 </template>
+
+<script>
+
+export default {
+  name: 'App',
+};
+</script>
+
+<style>
+</style>

@@ -149,4 +149,14 @@ class AuthController extends AbstractController
         }, $users);
         return new JsonResponse(["users" => $users], 200);
     }
+
+    #[Route('/auth/check', name: 'app_auth', methods: "GET")]
+    public function verifyToken(Request $request) : Response
+    {
+        if ($this->checkToken($request)) {
+            return new JsonResponse(["message" => "valid token"], 200);
+        }
+
+        return new JsonResponse(["message" => "token is not valid"], 401);
+    }
 }

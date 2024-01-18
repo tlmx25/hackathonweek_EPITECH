@@ -22,6 +22,18 @@ getAgencies:
 getInfoByAgency:
     path: /infos/agency/{agency}
     controller: App\Controller\InfosController:getInfosByAgency
+postEmployee:
+    path: /infos/employee
+    controller: App\Controller\InfosController:postEmployee
+    methods: [POST]
+patchEmployee:
+    path: /infos/employee/{id}
+    controller: App\Controller\InfosController:patchEmployee
+    methods: [PATCH]
+deleteEmployee:
+    path: /infos/employee/{id}
+    controller: App\Controller\InfosController:deleteEmployee
+    methods: [DELETE]
 addUser:
     path: /auth/addUser
     controller: App\Controller\AuthController:addUser
@@ -34,3 +46,6 @@ getAllUsers:
 initDb:
     path: /init
     controller: App\Controller\DbController:index
+verifyToken:
+    path: /auth/check
+    controller: App\Controller\AuthController:verifyToken
