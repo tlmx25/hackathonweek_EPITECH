@@ -11,8 +11,17 @@
           <img v-if="hoveredIndex !== index" :src="user.proImage ? user.proImage : noPicture" class="card-img-top" alt="...">
           <img v-else :src="user.funImage ? user.funImage : noPicture" class="card-img-top" :class="{ 'flipped': flippedCards.includes(index) }" alt="...">
           <div class="card-overlay"  v-if="hoveredIndex === index">
-            <p class="card-title" style="font-weight: bold;">{{ user.lastName }} {{ user.name }}</p>
-            <p class="card-text">{{ user.job }}</p>
+            <div v-if="!flippedCards.includes(index)">
+              <p class="card-title" style="font-weight: bold;">{{ user.lastName }} {{ user.name }}</p>
+              <p class="card-text">{{ user.job }}</p>
+            </div>
+            <div v-else>
+              <p class="card-text">Nom: {{ user.lastName }}</p>
+              <p class="card-text">Prénom: {{ user.name }}</p>
+              <p class="card-text">Poste: {{ user.job }}</p>
+              <p class="card-text">Team: {{ user.team }}</p>
+              <p class="card-text">Agence: {{ user.agency }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -102,6 +111,11 @@ export default {
   transform: rotateY(-180deg);
   height: 100%;
   background: #51767A;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: flex-end; */
 }
 
 </style>
