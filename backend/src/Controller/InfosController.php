@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use phpDocumentor\Reflection\Types\This;
+use App\Repository\EmployeeRepository;
+use App\Utils\Utils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,10 +12,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class InfosController extends AbstractController
 {
     private string $api_base_url;
-    private mixed $dataFile;
     private array $dictionary;
+    private Utils $utils;
+    private EmployeeRepository $employeeRepository;
+    private array $dataFromDB;
 
-    public function __construct()
+    public function __construct(
+        Utils $utils,
+        EmployeeRepository $employeeRepository
+    )
     {
         $this->dictionary = [
             "pole_ai" => "Pôle AI",
@@ -42,43 +48,64 @@ class InfosController extends AbstractController
                 ]
             ]
         ]));
-        $this->dataFile = json_decode($data, true);
-    }
-
-    private function filterMembers(string $field, string $fieldToCompare)
-    {
-        return array_filter($this->dataFile, function ($element) use ($field, $fieldToCompare) {
-            return trim($element[$field]) == trim($fieldToCompare);
-        });
+        $this->utils = $utils;
+        $this->employeeRepository = $employeeRepository;
+        $this->dataFromDB = $this->employeeRepository->findAll();
     }
 
     #[Route('/infos', name: 'app_infos', methods: "GET")]
     public function index(): Response
     {
-        return new JsonResponse($this->dataFile);
+        $finalData = [];
+
+        foreach ($this->dataFromDB as $elem) {
+            $finalData[] = [
+                "id" => $elem->getId(),
+                "name" => $elem->getName(),
+                "lastName" => $elem->getLastName(),
+                "job" => strtolower(trim($elem->getJob())),
+                "team" => strtolower(trim($elem->getTeam())),
+                "agency" => strtolower(trim($elem->getAgency())),
+                "proImage" => $elem->getProImage(),
+                "funImage" => $elem->getFunImage(),
+            ];
+        }
+        return new JsonResponse($finalData);
+    }
+
+    #[Route('/infos/posts', name: 'app_infos_posts', methods: "GET")]
+    public function getInfosPosts(): Response
+    {
+        return new JsonResponse($this->utils->getUniqueData($this->dataFromDB, "job"));
     }
 
     #[Route('/infos/post/{post}', name: 'app_infos_post', methods: "GET")]
     public function getInfosByPost(string $post): Response
     {
-        return new JsonResponse($this->filterMembers("poste", $post));
+        return new JsonResponse($this->utils->filterMembers($this->dataFromDB ,"job", $post));
+    }
+
+    #[Route('/infos/teams', name: 'app_infos_create_member', methods: "GET")]
+    public function getInfosTeams(): Response
+    {
+        return new JsonResponse($this->utils->getUniqueData($this->dataFromDB ,"team"));
     }
 
     #[Route('/infos/team/{team}', name: 'app_infos_team', methods: "GET")]
     public function getInfosByTeam(string $team): Response
     {
-        return new JsonResponse($this->filterMembers("equipe", $this->dictionary[$team]));
+        return new JsonResponse($this->utils->filterMembers($this->dataFromDB ,"team", $this->dictionary[$team]));
+    }
+
+    #[Route('/infos/agencies', name: 'app_infos_agency', methods: "GET")]
+    public function getInfosAgencies(): Response
+    {
+        return new JsonResponse($this->utils->getUniqueData($this->dataFromDB ,"agency"));
     }
 
     #[Route('/infos/agency/{agency}', name: 'app_infos_agency', methods: "GET")]
     public function getInfosByAgency(string $agency): Response
     {
-        return new JsonResponse($this->filterMembers("agence", $agency));
-    }
-
-    #[Route('/infos/agency/{agency}', name: 'app_infos_create_member', methods: "POST")]
-    public function postInfosByAgency(string $agency): Response
-    {
-        return new JsonResponse($this->filterMembers("agence", $agency));
+        return new JsonResponse($this->utils->filterMembers($this->dataFromDB ,"agency", $agency));
     }
 }
