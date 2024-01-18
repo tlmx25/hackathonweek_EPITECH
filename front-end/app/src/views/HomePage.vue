@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-5">
-        <IntroText />
+        <IntroText style="margin-top: 8rem;"/>
         <div class="row">
             <div class="col-md-3" style="margin-top: 4rem;">
                 <SearchBar @searchChange="updateSearch"/>
