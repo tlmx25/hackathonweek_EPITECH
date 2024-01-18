@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Employee;
 use App\Repository\EmployeeRepository;
 use App\Utils\Utils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,7 +48,6 @@ class InfosController extends AbstractController
                 ]
             ]
         ]));
-        $this->dataFromDB = json_decode($data, true);
         $this->utils = $utils;
         $this->employeeRepository = $employeeRepository;
         $this->dataFromDB = $this->employeeRepository->findAll();
@@ -74,6 +72,7 @@ class InfosController extends AbstractController
         }
         return new JsonResponse($finalData);
     }
+
     #[Route('/infos/posts', name: 'app_infos_posts', methods: "GET")]
     public function getInfosPosts(): Response
     {
