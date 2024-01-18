@@ -22,9 +22,9 @@ class Employee
     private ?string $team = null;
     #[ORM\Column(length: 255)]
     private ?string $agency = null;
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 1500)]
     private ?string $proImage = null;
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 1500)]
     private ?string $funImage = null;
 
     public function getId(): ?int
