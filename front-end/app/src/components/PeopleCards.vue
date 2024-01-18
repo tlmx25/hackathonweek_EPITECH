@@ -57,10 +57,8 @@ export default {
     },
     flipCard(index) {
       if (this.flippedCards.includes(index)) {
-        // Si la carte est déjà retournée, enlevez-la de la liste des cartes retournées
         this.flippedCards = this.flippedCards.filter((cardIndex) => cardIndex !== index);
       } else {
-        // Ajoutez la carte à la liste des cartes retournées
         this.flippedCards.push(index);
       }
   },
