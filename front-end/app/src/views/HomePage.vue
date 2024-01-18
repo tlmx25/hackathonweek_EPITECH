@@ -56,7 +56,6 @@ export default {
         }
       },
       updateFilters(filters) {
-        console.log(filters);
         if (filters.teams.length === 0 && (filters.cities.length === 0 || filters.cities.length === 2)) {
             this.filteredUsers = [...this.users];
         } else {
