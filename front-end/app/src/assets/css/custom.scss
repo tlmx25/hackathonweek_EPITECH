@@ -1,0 +1,60 @@
+// Colors
+$primary: #471efd92;
+$default: #D0FFE9;
+
+// main:not(.dark-mode) {
+//   // Colors
+//   --color-primary: #082DFF;
+//   --color-secondary: #ff55aa;
+//   --color-danger: #f63b3b;
+
+//   // Backgrounds
+//   --color-bg: #030202;
+//   --color-bg-light: #000000;
+//   --color-bg-dark: #111;
+
+//   // Elements
+//   --color-focus: #ff8d1c;
+//   --color-line: #999;
+
+//   // Texts
+//   --color-title: #222222;
+//   --color-text-dark: #222222;
+//   --color-text-light: #555555;
+//   --color-text-gray: #555555;
+//   --color-link-primary: #ff8d1c;
+  
+// }
+
+// main.dark-mode {
+//   // Colors
+//   --color-primary: #ff8d1c;
+//   --color-secondary: #ff55aa;
+//   --color-danger: #f63b3b;
+
+//   // Backgrounds
+//   --color-bg: #000000;
+//   --color-bg-light: #222222;
+//   --color-bg-dark: #111111;
+
+//   // Elements
+//   --color-focus: #ff8d1c;
+//   --color-line: #444444;
+
+//   // Texts
+//   --color-title: #ffffff;
+//   --color-text-dark: #ffffff;
+//   --color-text-light: #222222;
+//   --color-text-gray: #999999;
+//   --color-link-primary: #ff8d1c;
+// }
+
+// [data-bs-theme="light"] {
+//     --bs-primary: {$primary};
+//     --bs-primary-bg-subtle: {$primary};
+//     --bs-primary-bg-subtle-dark: {$primary};
+    
+//     .btn-primary {
+//       --bs-btn-bg: #{$primary};
+//     }
+// }
