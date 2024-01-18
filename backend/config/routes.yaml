@@ -1,6 +1,6 @@
-index:
+login:
     path: /auth
-    controller: App\Controller\AuthController:index
+    controller: App\Controller\AuthController:login
 infos:
     path: /infos
     controller: App\Controller\InfosController:index
@@ -22,5 +22,15 @@ getAgencies:
 getInfoByAgency:
     path: /infos/agency/{agency}
     controller: App\Controller\InfosController:getInfosByAgency
-postMemberInformation:
-    path: /info
+addUser:
+    path: /auth/addUser
+    controller: App\Controller\AuthController:addUser
+deleteUser:
+    path: /auth/deleteUser
+    controller: App\Controller\AuthController:deleteUser
+getAllUsers:
+    path: /auth/users
+    controller: App\Controller\AuthController:getAllUser
+initDb:
+    path: /init
+    controller: App\Controller\DbController:index

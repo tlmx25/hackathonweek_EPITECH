@@ -1,23 +1,6 @@
 version: '3'
 
 services:
-    # Service pour le serveur web
-    web:
-        build:
-            context: ./backend
-            dockerfile: Dockerfile
-        image: ubuntu:latest
-        container_name: backend_web
-        restart: unless-stopped
-        ports:
-            - "8000:8000"
-        command: sh -c "symfony serve --allow-http --no-tls"
-        env_file:
-            -   backend/.env
-        volumes:
-            - ./symfony:/var/www/html
-        depends_on:
-            - php
     database:
         container_name: backend_database
         image: postgres:12.8
@@ -35,6 +18,22 @@ services:
         restart: unless-stopped
         volumes:
             - ./symfony:/var/www/html
+    web:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        image: ubuntu:latest
+        container_name: backend_web
+        restart: unless-stopped
+        ports:
+            - "8000:8000"
+        command: sh -c "symfony serve --allow-http --no-tls"
+        env_file:
+            - backend/.env
+        volumes:
+            - ./symfony:/var/www/html
+        depends_on:
+            - php
 
 networks:
     mon_projet_net:
