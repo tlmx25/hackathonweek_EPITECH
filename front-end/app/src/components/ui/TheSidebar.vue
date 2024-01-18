@@ -6,7 +6,7 @@
       <div class="text-align bg-custom">
         <div class="container" role="button"  @click="changeElem('Home')" :class="{ 'selected': isSelected === 'Home' }">
           <span class="material-symbols-outlined me-3">home</span>
-          <span style="margin-top: 3px">Acceuil</span>
+          <span style="margin-top: 3px">Accueil</span>
         </div>
         <div class="container" role="button"  @click="changeElem('Trombi')" :class="{ 'selected': isSelected === 'Trombi' }">
           <span class="material-symbols-outlined me-3">photo_library</span>

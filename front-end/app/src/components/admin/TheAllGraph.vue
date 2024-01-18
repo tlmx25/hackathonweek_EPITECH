@@ -10,7 +10,37 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 
 export default {
+    props: {
+        users: {
+            type: Array,
+            required: true,
+        }
+    },
+    data() {
+        return {
+            data: {},
+        }
+    },
+    methods: {
+        parseAllData() {
+            this.data = {};
+            this.users.forEach(user => {
+                const { agency, job } = user;
+                if (!this.data[agency]) {
+                    this.data[agency] = { quantity: 0 };
+                }
+                if (!this.data[agency][job]) {
+                    this.data[agency][job] = 1;
+                } else {
+                    this.data[agency][job]++;
+                }
+                this.data[agency].quantity++;
+            });
+            console.log(this.data);
+        }
+    },
     mounted() {
+        this.parseAllData();
         let root = am5.Root.new("chartdiv");
 
         root.setThemes([
@@ -51,7 +81,7 @@ export default {
             minorGridEnabled:true
         });
 
-        xRenderer.labels.template.setAll({ text: "{realName}" });
+        xRenderer.labels.template.setAll({ text: "" });
 
         let xAxis = chart.xAxes.push(
             am5xy.CategoryAxis.new(root, {
@@ -59,7 +89,7 @@ export default {
                 categoryField: "category",
                 renderer: xRenderer,
                 tooltip: am5.Tooltip.new(root, {
-                labelText: "{realName}"
+                labelText: ""
                 })
             })
         );
@@ -67,7 +97,7 @@ export default {
         let yAxis = chart.yAxes.push(
             am5xy.ValueAxis.new(root, {
                 maxDeviation: 0.3,
-                renderer: am5xy.AxisRendererY.new(root, {})
+                renderer: am5xy.AxisRendererY.new(root, { opposite: true })
             })
         );
 
@@ -75,7 +105,9 @@ export default {
             am5xy.ValueAxis.new(root, {
                 maxDeviation: 0.3,
                 syncWithAxis: yAxis,
-                renderer: am5xy.AxisRendererY.new(root, { opposite: true })
+                renderer: am5xy.AxisRendererY.new(root, {}),
+                max: 25,
+                min: 0
             })
         );
         let series = chart.series.push(
@@ -148,33 +180,12 @@ export default {
 
         let chartData = [];
 
-        // Set data
-        let data = {
-        "Provider 1": {
-            "item 1": 10,
-            "item 2": 35,
-            "item 3": 5,
-            "item 4": 20,
-            quantity: 430
-        },
-        "Provider 2": {
-            "item 1": 15,
-            "item 3": 21,
-            quantity: 210
-        },
-        "Provider 3": {
-            "item 2": 25,
-            "item 3": 11,
-            "item 4": 17,
-            quantity: 265
-        },
-        "Provider 4": {
-            "item 3": 12,
-            "item 4": 15,
-            quantity: 98
-        }
-        };
+        let data = this.data;
 
+        console.log(data);
+
+        let data2 = this.data;
+        console.log(data2);
         for (var providerName in data) {
         let providerData = data[providerName];
 
@@ -191,15 +202,6 @@ export default {
             });
             }
         }
-        tempArray.sort(function (a, b) {
-            if (a.value > b.value) {
-            return 1;
-            } else if (a.value < b.value) {
-            return -1;
-            } else {
-            return 0;
-            }
-        });
         let lineSeriesDataIndex = Math.floor(count / 2);
         tempArray[lineSeriesDataIndex].quantity = providerData.quantity;
         tempArray[lineSeriesDataIndex].count = count;
@@ -242,7 +244,7 @@ export default {
         lineSeries.data.setAll(chartData);
         series.appear(1000);
         chart.appear(1000, 100);
-            }
+    }
 }
 </script>
 

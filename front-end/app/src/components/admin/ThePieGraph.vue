@@ -19,56 +19,93 @@ export default {
             equipes: [],
         }
     },
+    props: {
+        users: {
+            type: Array,
+            required: true,
+        }
+    },
+    methods: {
+        generatePie() {
+            let root = am5.Root.new("chartdiv2");
+            root.setThemes([
+                am5themes_Animated.new(root)
+            ]);
+
+            let chart = root.container.children.push(
+                am5percent.PieChart.new(root, {
+                    endAngle: 270,
+                    paddingTop: 80,
+                })
+            );
+
+            let title = am5.Label.new(root, {
+                text: "Graphique des Agences",
+                fontSize: 25,
+                fontWeight: "700",
+                textAlign: "center",
+                x: am5.percent(1),
+                y: am5.percent(-25),
+                centerX: am5.percent(0),
+                paddingTop: 0,
+                paddingBottom: 0,
+                marginBottom: 0,
+            });
+
+            chart.children.unshift(title);
+
+            let series = chart.series.push(
+                am5percent.PieSeries.new(root, {
+                    valueField: "value",
+                    categoryField: "category",
+                    endAngle: 270,
+                    labelRadius: am5.percent(80),
+                })
+            );
+
+            series.labels.template.setAll({
+                fontSize: 10,
+            });
+
+            series.states.create("hidden", {
+                endAngle: -90
+            });
+
+            const data = this.agences.map(agence => ({
+                category: agence.agence,
+                value: agence.count
+            }));
+            series.data.setAll(data);
+
+            series.appear(1000, 100);
+        },
+        agenciesP() {
+            const agencesCount = {};
+            const totalPersons = this.users.length;
+            this.users.forEach(user => {
+                const agence = user.agency;
+                if (!agencesCount[agence]) {
+                    agencesCount[agence] = { count: 1, percentage: 0 };
+                } else {
+                    agencesCount[agence].count++;
+                }
+            });
+            Object.keys(agencesCount).forEach(agence => {
+                agencesCount[agence].percentage = (agencesCount[agence].count / totalPersons) * 100;
+            });
+            this.agences = Object.entries(agencesCount).map(([agence, data]) => ({ agence, ...data }));
+        }
+    },
     mounted() {
-        let root = am5.Root.new("chartdiv2");
-
-// Set themes
-// https://www.amcharts.com/docs/v5/concepts/themes/
-root.setThemes([
-  am5themes_Animated.new(root)
-]);
-
-// Create chart
-// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
-let chart = root.container.children.push(
-  am5percent.PieChart.new(root, {
-    endAngle: 270
-  })
-);
-
-// Create series
-// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
-let series = chart.series.push(
-  am5percent.PieSeries.new(root, {
-    valueField: "value",
-    categoryField: "category",
-    endAngle: 270
-  })
-);
-
-series.states.create("hidden", {
-  endAngle: -90
-});
-
-// Set data
-// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
-series.data.setAll([{
-  category: "Lithuania",
-  value: 501.9
-}, {
-  category: "Czechia",
-  value: 301.9
-}]);
-
-series.appear(1000, 100);
+        this.agenciesP();
+        this.generatePie();
     }
 }
-
 </script>
 
 <style scoped>
 #chartdiv2 {
     width: 100%;
-    height: 250px;
+    height: 400px;
   }
 </style>

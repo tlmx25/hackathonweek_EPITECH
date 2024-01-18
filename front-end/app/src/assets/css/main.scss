@@ -124,7 +124,11 @@ body {
   .form-control:focus {
     box-shadow: none;
   }
-  
+
+  .form-select:focus {
+    box-shadow: none;
+  }
+
   @media screen and (max-width: 700px) {
     .sidebar {
       width: 100%;
