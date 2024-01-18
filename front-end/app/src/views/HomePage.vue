@@ -36,6 +36,7 @@ export default {
         return {
             users: [],
             images: [],
+            filters: {},
             filteredUsers: [],
             teams: ['Pôle AI', 'Pôle Walker', 'Team IT', 'Team Rocket', 'Pôle Cousteau', 'Pôle 8.6', 'Pôle Position',
                 'Bug Buster', 'Team Elephant', 'Team Eden', 'Studio Design', 'Pôle Passe Partout', 'Team Dev', 'Pôle Griffondor'],
@@ -58,11 +59,12 @@ export default {
                 user.lastName.toLowerCase().startsWith(search.search.toLowerCase()) || search.search.toLowerCase() == user.name.toLowerCase() + ' ' + user.lastName.toLowerCase());
             this.filteredUsers = temp;
         } else {
-            this.filteredUsers = [...this.users];
+            this.updateFilters(this.filters);
         }
       },
 
       updateFilters(filters) {
+        this.filters = filters;
         if (filters.teams.length === 0 && (filters.cities.length === 0 || filters.cities.length === 2)) {
             this.filteredUsers = [...this.users];
         } else {
