@@ -22,6 +22,14 @@ getAgencies:
 getInfoByAgency:
     path: /infos/agency/{agency}
     controller: App\Controller\InfosController:getInfosByAgency
+postEmployee:
+    path: /infos/employee
+    controller: App\Controller\InfosController:postEmployee
+    methods: [POST]
+patchEmployee:
+    path: /infos/employee/{id}
+    controller: App\Controller\InfosController:postEmployee
+    methods: [PATCH]
 addUser:
     path: /auth/addUser
     controller: App\Controller\AuthController:addUser
