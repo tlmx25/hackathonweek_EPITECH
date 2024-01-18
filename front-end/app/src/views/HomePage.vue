@@ -4,7 +4,7 @@
         <IntroText style="margin-top: 8rem;"/>
         <div class="row">
             <div class="col-md-3" style="margin-top: 4rem;">
-                <SearchBar @searchChange="updateSearch"/>
+                <SearchBar @searchChange="updateSearch" :users="users"/>
                 <FilterCards :teams="teams" @filterChange="updateFilters"/>
             </div>
             <div class="col">
@@ -36,6 +36,7 @@ export default {
         return {
             users: [],
             images: [],
+            filters: {},
             filteredUsers: [],
             teams: ['Pôle AI', 'Pôle Walker', 'Team IT', 'Team Rocket', 'Pôle Cousteau', 'Pôle 8.6', 'Pôle Position',
                 'Bug Buster', 'Team Elephant', 'Team Eden', 'Studio Design', 'Pôle Passe Partout', 'Team Dev', 'Pôle Griffondor'],
@@ -49,16 +50,21 @@ export default {
         this.users = await fetchData('/infos');
         this.filteredUsers = [...this.users];
       },
+
       updateSearch(search) {
+        let temp;
+
         if (search && search.search.trim() != '') {
-            this.filteredUsers = this.filteredUsers.filter(user => user.lastName.toLowerCase().includes(search.search.toLowerCase()) ||
-                user.name.toLowerCase().includes(search.search.toLowerCase()));
+            temp = this.users.filter(user => user.name.toLowerCase().startsWith(search.search.toLowerCase()) ||
+                user.lastName.toLowerCase().startsWith(search.search.toLowerCase()) || search.search.toLowerCase() == user.name.toLowerCase() + ' ' + user.lastName.toLowerCase());
+            this.filteredUsers = temp;
         } else {
-            this.filteredUsers = [...this.users];
-            // TODO : if other filters applied ???
+            this.updateFilters(this.filters);
         }
       },
+
       updateFilters(filters) {
+        this.filters = filters;
         if (filters.teams.length === 0 && (filters.cities.length === 0 || filters.cities.length === 2)) {
             this.filteredUsers = [...this.users];
         } else {

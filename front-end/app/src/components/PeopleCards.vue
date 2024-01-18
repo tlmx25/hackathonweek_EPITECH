@@ -12,15 +12,15 @@
           <img v-else :src="user.funImage ? user.funImage : noPicture" class="card-img-top" :class="{ 'flipped': flippedCards.includes(index) }" alt="...">
           <div class="card-overlay"  v-if="hoveredIndex === index">
             <div v-if="!flippedCards.includes(index)">
-              <p class="card-title" style="font-weight: bold;">{{ user.lastName }} {{ user.name }}</p>
+              <p class="card-title" style="font-weight: bold;">{{ user.name }} {{ user.lastName }}</p>
               <p class="card-text">{{ user.job }}</p>
             </div>
             <div v-else>
-              <p class="card-text">Nom: {{ user.lastName }}</p>
-              <p class="card-text">Prénom: {{ user.name }}</p>
-              <p class="card-text">Poste: {{ user.job }}</p>
-              <p class="card-text">Team: {{ user.team }}</p>
-              <p class="card-text">Agence: {{ user.agency }}</p>
+              <p class="text-rotate"><span style="font-weight: bold;">Nom: </span>{{ user.lastName }}</p>
+              <p class="text-rotate"><span style="font-weight: bold;">Prénom: </span>{{ user.name }}</p>
+              <p class="text-rotate"><span style="font-weight: bold;">Poste: </span>{{ user.job }}</p>
+              <p class="text-rotate"><span style="font-weight: bold;">Team: </span>{{ user.team }}</p>
+              <p class="text-rotate"><span style="font-weight: bold;">Agence: </span>{{ user.agency }}</p>
             </div>
           </div>
         </div>
@@ -57,10 +57,8 @@ export default {
     },
     flipCard(index) {
       if (this.flippedCards.includes(index)) {
-        // Si la carte est déjà retournée, enlevez-la de la liste des cartes retournées
         this.flippedCards = this.flippedCards.filter((cardIndex) => cardIndex !== index);
       } else {
-        // Ajoutez la carte à la liste des cartes retournées
         this.flippedCards.push(index);
       }
   },
@@ -111,11 +109,14 @@ export default {
   transform: rotateY(-180deg);
   height: 100%;
   background: #51767A;
+  align-items: center;
+}
+
+.text-rotate {
+  margin-bottom: 1rem !important;
+  margin-left: 1rem !important;
+  word-wrap: break-word;
   text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* align-items: flex-end; */
 }
 
 </style>
