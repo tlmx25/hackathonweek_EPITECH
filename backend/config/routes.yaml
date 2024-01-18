@@ -28,8 +28,12 @@ postEmployee:
     methods: [POST]
 patchEmployee:
     path: /infos/employee/{id}
-    controller: App\Controller\InfosController:postEmployee
+    controller: App\Controller\InfosController:patchEmployee
     methods: [PATCH]
+deleteEmployee:
+    path: /infos/employee/{id}
+    controller: App\Controller\InfosController:deleteEmployee
+    methods: [DELETE]
 addUser:
     path: /auth/addUser
     controller: App\Controller\AuthController:addUser

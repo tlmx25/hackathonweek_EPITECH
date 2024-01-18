@@ -136,25 +136,33 @@ class InfosController extends AbstractController
         return new Response("Employee " . $body["name"] . " " . $body["lastName"] . " already exists.", 400);
     }
 
+    /**
+     * @throws \Exception
+     */
     #[Route('/infos/employee/{id}', name: 'app_infos_employee_patch', methods: "PATCH")]
-    public function patchEmployee(Request $request, string $id): Response
+    public function patchEmployee(Request $request, $id): Response
     {
-        dd($id);
         $body = json_decode($request->getContent(), true);
 
-        $existingEmployee = $this->employeeRepository->findOneBy(["lastName" => $body["lastName"]]);
-        if (!$existingEmployee) {
-            $employee = new Employee();
-            $employee->setName($body["name"]);
-            $employee->setLastName($body["lastName"]);
-            $employee->setJob($body["job"]);
-            $employee->setTeam($body["team"]);
-            $employee->setAgency($body["agency"]);
-            $employee->setProImage($body["proImage"] ?? "");
-            $employee->setFunImage($body["funImage"] ?? "");
-            $this->employeeRepository->save($employee);
-            return new Response("Created employee " . $body["name"] . " " . $body["lastName"], 200);
+        $existingEmployee = $this->employeeRepository->findOneBy(["id" => intval($id)]);
+        try {
+            $this->employeeRepository->updateEmployeeById(intval($id), $body);
+            return new Response("Modified employee " . $body["name"] . " " . $body["lastName"], 200);
+        } catch (\Exception $e) {
+            return new Response("Employee " . $existingEmployee->getName() . " " . $existingEmployee->getLastName() . " not found.", 404);
         }
-        return new Response("Employee " . $body["name"] . " " . $body["lastName"] . " already exists.", 400);
+    }
+
+    #[Route('/infos/employee/{id}', name: 'app_infos_employee_patch', methods: "DELETE")]
+    public function deleteEmployee(string $id): Response
+    {
+
+        $existingEmployee = $this->employeeRepository->findOneBy(["id" => intval($id)]);
+        try {
+            $this->employeeRepository->deleteEmployeeById(intval($id));
+            return new Response("Modified employee " . $existingEmployee->getName() . " " . $existingEmployee->getLastName() , 200);
+        } catch (\Exception $e) {
+            return new Response("Employee " . $existingEmployee->getName() . " " . $existingEmployee->getLastName() . " not found.", 404);
+        }
     }
 }

@@ -18,6 +18,7 @@ class EmployeeRepository extends ServiceEntityRepository
         $this->_em->persist($employee);
         $this->_em->flush();
     }
+
     public function updateEmployeeById(int $employeeId, array $dataToUpdate): void
     {
         $employee = $this->_em->getRepository(Employee::class)->find($employeeId);
@@ -27,11 +28,16 @@ class EmployeeRepository extends ServiceEntityRepository
         }
 
         foreach ($dataToUpdate as $property => $value) {
-            $setterMethod = 'set' . ucfirst($property);
-            $employee->$setterMethod($value);
+            // Exclude updating the ID
+            if ($property !== 'id') {
+                $setterMethod = 'set' . ucfirst($property);
+                $employee->$setterMethod($value);
+            }
         }
+
         $this->_em->flush();
     }
+
 
     public function deleteEmployeeById(int $employeeId): void
     {
