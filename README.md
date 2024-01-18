@@ -9,6 +9,10 @@ This is a hackathon organized by [Epitech](https://www.epitech.eu/) and [6TM](ht
 - [Docker](https://docs.docker.com/engine/install/)
 
 ## Getting started 🚀
+### Config your environnement
+```bash
+cp backend
+```
 ### Run project
 ```bash
 ./setup.sh --init
