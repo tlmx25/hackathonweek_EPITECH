@@ -7,11 +7,11 @@
           @mouseleave="hideInfo()"
           @click="flipCard(index)"
         >
-          <img v-if="hoveredIndex !== index" :src="user.photo_pro ? user.photo_pro : noPicture" class="card-img-top" alt="...">
-          <img v-else :src="user.photo_fun ? user.photo_fun : noPicture" class="card-img-top" alt="...">
+          <img v-if="hoveredIndex !== index" :src="user.proImage ? user.proImage : noPicture" class="card-img-top" alt="...">
+          <img v-else :src="user.funImage ? user.funImage : noPicture" class="card-img-top" alt="...">
           <div class="card-overlay"  v-if="hoveredIndex === index">
-            <p class="card-title" style="font-weight: bold;">{{ user.nom }} {{ user.prenom }}</p>
-            <p class="card-text">{{ user.poste }}</p>
+            <p class="card-title" style="font-weight: bold;">{{ user.lastName }} {{ user.name }}</p>
+            <p class="card-text">{{ user.job }}</p>
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     generateKey(user, index) {
-      return `${user.nom}_${user.prenom}_${index}`;
+      return `${user.lastName}_${user.name}_${index}`;
     },
     showInfo(index) {
       this.hoveredIndex = index;
@@ -64,10 +64,7 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    /* background: #C5C2FF; */
-    /* background: #D0FFE9; */
     background: #151F2A;
-    /* color: #D0FFE9; */
     color: #FFFFFF;
     display: flex;
     flex-direction: column;

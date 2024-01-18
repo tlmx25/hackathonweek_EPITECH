@@ -43,26 +43,26 @@ export default {
     },
     methods: {
       async getData() {
-        this.users = await fetchData('https://6tm-hackatlhon.b-cdn.net/data.json');
+        this.users = await fetchData('/infos');
         this.filteredUsers = [...this.users];
       },
       updateSearch(search) {
         if (search && search.search.trim() != '') {
-            this.filteredUsers = this.filteredUsers.filter(user => user.nom.toLowerCase().includes(search.search.toLowerCase()) ||
-                user.prenom.toLowerCase().includes(search.search.toLowerCase()));
+            this.filteredUsers = this.filteredUsers.filter(user => user.lastName.toLowerCase().includes(search.search.toLowerCase()) ||
+                user.name.toLowerCase().includes(search.search.toLowerCase()));
         } else {
             this.filteredUsers = [...this.users];
             // TODO : if other filters applied ???
         }
       },
       updateFilters(filters) {
+        console.log(filters);
         if (filters.teams.length === 0 && (filters.cities.length === 0 || filters.cities.length === 2)) {
             this.filteredUsers = [...this.users];
         } else {
             this.filteredUsers = this.users.filter(user => {
-                // team + ' ' to check the ones that have a space at the end
-                const teams = filters.teams.length === 0 || filters.teams.some(team => team === user.equipe || team + ' ' === user.equipe);
-                const cities = filters.cities.length === 0 || filters.cities.some(city => city === user.agence);
+                const teams = filters.teams.length === 0 || filters.teams.some(team => team === user.team);
+                const cities = filters.cities.length === 0 || filters.cities.some(city => city === user.agency);
                 return teams && cities;
             });
         }
