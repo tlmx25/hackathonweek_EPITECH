@@ -42,3 +42,6 @@ getAllUsers:
 initDb:
     path: /init
     controller: App\Controller\DbController:index
+verifyToken:
+    path: /auth/check
+    controller: App\Controller\AuthController:verifyToken
