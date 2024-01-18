@@ -34,9 +34,23 @@ export default {
         }
     },
     methods: {
+        async checkUser() {
+            const response = await fetch('http://localhost:8000/auth/check', {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+            });
+            if (!response.ok) {
+                this.$router.push('/admin/login');
+            }
+            console.log(response);
+        },
         async fetchUsers() {
             const users = await fetchData('infos');
             this.users = users;
+            console.log(this.users)
         },
         async fetchUser() {
         axios.defaults.baseURL = 'http://localhost:8000/';
@@ -50,6 +64,7 @@ export default {
         }
     },
     mounted() {
+        this.checkUser();
         this.fetchUsers();
         this.fetchUser();
     }

@@ -1,7 +1,7 @@
 <template>
   <!-- eslint-disable-->
 	<div class="section" style="overflow-y: hidden;">
-    <img src="@/assets/6tmLogo.png" alt="Vue" class="logo"/>
+    <img src="@/assets/6bg.svg" alt="Vue" class="logo"/>
 		<div class="container">
 			<div class="row full-height justify-content-center">
 				<div class="col-12 text-center align-self-center py-5">
@@ -17,14 +17,15 @@
 										<div class="section text-center" style="background-color: transparent;">
 											<h4 class="mb-4 pb-3" style="color: #c4c3ca;">Connexion</h4>
 											<div class="form-group">
-												<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+												<input v-model="name" type="email" name="logemail" class="form-style" placeholder="Email" id="logemail" autocomplete="off">
 												<i class="input-icon uil uil-at"></i>
 											</div>	
 											<div class="form-group mt-2">
-												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+												<input v-model="password" type="password" name="logpass" class="form-style" placeholder="Mot de passe" id="logpass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<a href="#" class="btn mt-5">Se Connecter</a>
+											<a href="#" class="btn mt-5 mb-3" @click="connexion()">Se Connecter</a>
+                      <p @click="this.$router.push('/')"><U>Retour en arrière</U></p>
 				      					</div>
 			      					</div>
 			      				</div>
@@ -32,19 +33,8 @@
 									<div class="center-wrap">
 										<div class="section text-center" style="background-color: transparent;">
 											<h4 class="mb-4 pb-3" style="color: #c4c3ca;">Inscription</h4>
-											<div class="form-group">
-												<input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
-												<i class="input-icon uil uil-user"></i>
-											</div>	
-											<div class="form-group mt-2">
-												<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
-												<i class="input-icon uil uil-at"></i>
-											</div>	
-											<div class="form-group mt-2">
-												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
-											<a href="#" class="btn mt-4">submit</a>
+											<p>Pour accéder au Panel Admin, veuillez noter que l'accès est restreint et nécessite une permission spéciale. Si vous souhaitez obtenir l'autorisation, veuillez contacter un administrateur du site pour discuter de votre demande. Nous apprécions votre compréhension et votre coopération.</p>
+                      <p @click="this.$router.push('/')"><U>Retour en arrière</U></p>
 				      					</div>
 			      					</div>
 			      				</div>
@@ -56,6 +46,82 @@
 	    </div>
 	</div>
 </template>
+
+<script>
+
+import axios from 'axios'
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      name: '',
+    }
+  },
+  methods: {
+    async submitUser() {
+      const user = {
+        username: this.name,
+        password: this.password,
+        email: this.email,
+      }
+      const response = await fetch('http://localhost:8000/auth/addUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+      const data = await response.json();
+      console.log(data);
+    },
+    async fetchUser() {
+      try {
+            const data = await axios.get('auth/users');
+            console.log(data.data);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données:', error);
+        }
+    },
+    async checkUser() {
+      console.log(localStorage.getItem('token'))
+      const response = await fetch('http://localhost:8000/auth/check', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+      });
+      if (response.ok) {
+        this.$router.push('/admin/home');
+      }
+    },
+    async connexion() {
+      const user = {
+        username: this.name,
+        password: this.password,
+      }
+      const response = await fetch('http://localhost:8000/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user),
+      });
+      console.log(user);
+      const data = await response.json();
+      console.log(data);
+      localStorage.setItem('token', data.token);
+      this.checkUser();
+    }
+  },
+  mounted() {
+    this.fetchUser();
+  }
+}
+
+</script>
 
 <style scoped>
 a {
@@ -111,7 +177,7 @@ h6 span{
   padding: 0;
   margin: 10px auto;
   cursor: pointer;
-  background-color: #ffeba7;
+  background-color: #d0ffe9;
 }
 .checkbox:checked + label:before,
 .checkbox:not(:checked) + label:before{
@@ -121,7 +187,7 @@ h6 span{
   height: 36px;
   border-radius: 50%;
   color: #ffeba7;
-  background-color: #102770;
+  background-color: #51767A;
   font-family: 'unicons';
   content: '\eb4f';
   z-index: 20;
@@ -202,7 +268,6 @@ h6 span{
 }
 .form-style {
   padding: 13px 20px;
-  padding-left: 55px;
   height: 48px;
   width: 100%;
   font-weight: 500;
@@ -212,7 +277,7 @@ h6 span{
   letter-spacing: 0.5px;
   outline: none;
   color: #c4c3ca;
-  background-color: #1f2029;
+  background-color: #51767A;
   border: none;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
@@ -306,19 +371,18 @@ h6 span{
   -ms-flex-pack: center;
   text-align: center;
   border: none;
-  background-color: #ffeba7;
-  color: #102770;
-  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+  background-color: #ffffff;
+  color: #51767A;
 }
 .btn:active,
 .btn:focus{  
-  background-color: #102770;
+  background-color: #51767A;
   color: #ffeba7;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 .btn:hover{  
-  background-color: #D2ECDE;
-  color: #ffeba7;
+  background-color: #caf1dc;
+  color: black;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 
@@ -329,9 +393,10 @@ h6 span{
   position: absolute;
   display: block;
   z-index: 1;
-  left: -10vw;
-  opacity: 0.6;
-  width: 700px;
+  top: -5vh;
+  left: -350px;
+  opacity: 1;
+  width: 1000px;
   transition: all 250ms linear;
   overflow-y: hidden;
 }

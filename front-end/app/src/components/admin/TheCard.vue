@@ -1,5 +1,5 @@
 <template>
-  <CreateUser />
+  <CreateUser @personAdded="addPerson"/>
   <form class="d-flex justify-content-center mb-3" style="margin-left: 75px;" @submit.prevent="filterUser">
     <input v-model="searchTerm" @input="updateSearchResults" class="form-control" style="width: 30vw;" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success ms-2" type="submit">Search</button>
@@ -43,18 +43,35 @@
               <div class="d-flex" style="border-top: 2px solid #dee2e6;">
                 <div class="mb-3 mt-3">
                   <label for="exampleFormControlInput1" class="form-label shadow-none">Nom</label>
-                  <input type="email" class="form-control" style="width: 90%;" id="'exampleFormControlInput1' + index" placeholder="Jonas">
+                  <input type="email" class="form-control" style="width: 90%;" id="'exampleFormControlInput1' + index" :placeholder="user.lastName">
                 </div>
                 <div class="mb-3 mt-3">
                   <label for="exampleFormControlInput1" class="form-label shadow-none">Prenom</label>
-                  <input type="email" class="form-control" style="width: 90%;" id="'exampleFormControlInput1' + index" placeholder="Jonas">
+                  <input type="email" class="form-control" style="width: 90%;" id="'exampleFormControlInput1' + index" :placeholder="user.name">
                 </div>
+              </div>
+              <div class="d-flex" style="border-top: 2px solid #dee2e6;">
+                <div class="mb-3 mt-3">
+                  <label for="exampleFormControlInput1" class="form-label shadow-none">Poste</label>
+                  <input type="email" class="form-control" style="width: 90%;" id="'exampleFormControlInput1' + index" :placeholder="user.job">
+                </div>
+                <div class="mb-3 mt-3">
+                  <label for="exampleFormControlInput1" class="form-label shadow-none">Equipe</label>
+                  <input type="email" class="form-control" style="width: 90%;" id="'exampleFormControlInput1' + index" :placeholder="user.team">
+                </div>
+                <div class="mb-3 mt-3">
+                  <label for="exampleFormControlInput1" class="form-label shadow-none">Agence</label>
+                  <input type="email" class="form-control" style="width: 90%;" id="'exampleFormControlInput1' + index" :placeholder="user.agency">
+                </div>
+              </div>
+              <div class="d-flex ">
+                <button @click="editPerson(user.id)" class="btn btn-success">Save</button>
               </div>
             </div>
           </div>
           <div class="card-footer d-flex justify-content-between">
             <button class="btn btn-success" type="button" data-bs-toggle="collapse" :data-bs-target="'#EpicCollapse' + index" aria-expanded="false" aria-controls="'EpicCollapse' + index">Edit</button>
-            <button class="btn btn-danger" type="button" data-toggle="collapse" :data-target="'#EpicCollapse' + index" aria-expanded="false" aria-controls="'EpicCollapse' + index">Remove</button>
+            <button @click="deleteUser(user.id)" class="btn btn-danger" type="button" data-toggle="collapse" :data-target="'#EpicCollapse' + index" aria-expanded="false" aria-controls="'EpicCollapse' + index">Remove</button>
           </div>
         </div>
       </div>
@@ -76,9 +93,44 @@ export default {
       filteredUsers: [],
       searchResults: [],
       showResults: false,
+      editLastName: '',
+      editName: '',
+      editJob: '',
+      editTeam: '',
+      editAgency: '',
     };
   },
   methods: {
+    async editPerson(id) {
+      const data = {
+        name: this.editName,
+        lastName: this.editLastName,
+        job: this.editJob,
+        team: this.editTeam,
+        agency: this.editAgency,
+      };
+      try {
+        const response = await fetch('http://localhost:8000/infos/employee/' + id, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          body: JSON.stringify(data),
+        });
+        if (response.ok) {
+          this.users = this.users.filter(user => user.id !== id);
+          this.filteredUsers = this.filteredUsers.filter(user => user.id !== id);
+        } else {
+          console.log('La suppression a échoué.');
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    addPerson(person) {
+      this.users.push(person);
+    },
     async fetchUsers() {
       const users = await fetchData('/infos');
       this.users = users;
@@ -112,7 +164,29 @@ export default {
     getRes(result) {
       this.searchTerm = result;
       this.showResults = false;
-    }
+    },
+    async deleteUser(id) {
+      try {
+        const response = await fetch('http://localhost:8000/infos/employee/' + id, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          this.users = this.users.filter(user => user.id !== id);
+          this.filteredUsers = this.filteredUsers.filter(user => user.id !== id);
+        } else {
+          console.log('La suppression a échoué.');
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    handlePersonAdded(newPerson) {
+      this.users.push(newPerson);
+      this.filteredUsers.push(newPerson);
+    },
   },
   async mounted() {
     await this.fetchUsers();

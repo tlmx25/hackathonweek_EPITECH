@@ -146,9 +146,7 @@ export default {
                     equipesCount[equipe].count++;
                 }
             });
-            console.log(equipesCount);
             this.equipes = Object.entries(equipesCount).map(([equipe, data]) => ({ equipe, ...data }));
-            console.log(this.equipes)
         },
     },
     mounted() {

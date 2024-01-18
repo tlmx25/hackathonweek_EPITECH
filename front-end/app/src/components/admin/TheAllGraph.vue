@@ -182,10 +182,6 @@ export default {
 
         let data = this.data;
 
-        console.log(data);
-
-        let data2 = this.data;
-        console.log(data2);
         for (var providerName in data) {
         let providerData = data[providerName];
 
