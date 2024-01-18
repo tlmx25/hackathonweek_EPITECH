@@ -8,10 +8,25 @@ This is a hackathon organized by [Epitech](https://www.epitech.eu/) and [6TM](ht
 ## Requirements
 - [Docker](https://docs.docker.com/engine/install/)
 
+# BackOffice
+![image](.github/assets/front-login-back-office.png)
+![image](.github/assets/front-graph-back-office.png)
+![image](.github/assets/front-edit-back-office.png)
+<br>
+<br>
+<br>
+
+# Trombinoscope
+![image](.github/assets/front-6tm-employees.png)
+![image](.github/assets/front-6tm.png)
+<br>
+<br>
+<br>
+
 ## Getting started 🚀
-### Config your environnement
+### Config your environnement and fill with your db data, ...
 ```bash
-cp backend
+cp backend/.env.dist backend/.env
 ```
 ### Run project
 ```bash

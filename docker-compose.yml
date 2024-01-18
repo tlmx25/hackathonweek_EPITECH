@@ -11,12 +11,6 @@ services:
         volumes:
             - db:/var/lib/postgresql/data
         restart: always
-    php:
-        image: php:8.1.27-fpm
-        container_name: backend_php
-        restart: unless-stopped
-        volumes:
-            - ./symfony:/var/www/html
     web:
         build:
             context: ./backend
@@ -31,8 +25,6 @@ services:
             - backend/.env
         volumes:
             - ./symfony:/var/www/html
-        depends_on:
-            - php
     front:
         build:
             context: ./front-end/app
