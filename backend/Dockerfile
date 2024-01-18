@@ -26,8 +26,4 @@ RUN composer update
 
 EXPOSE 8000
 
-#RUN php bin/console doctrine:database:create
-#RUN php bin/console make:migration
-#RUN php bin/console doctrine:migrations:migrate
-CMD ["symfony", "server:start", "--no-tls", "--port=8080"]
-
+CMD ["./setup.sh"]
