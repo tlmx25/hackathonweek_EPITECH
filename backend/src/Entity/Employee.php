@@ -15,6 +15,8 @@ class Employee
     #[ORM\Column(length: 255)]
     private ?string $name = null;
     #[ORM\Column(length: 255)]
+    private ?string $lastName = null;
+    #[ORM\Column(length: 255)]
     private ?string $job = null;
     #[ORM\Column(length: 255)]
     private ?string $team = null;
@@ -38,6 +40,16 @@ class Employee
     public function setName(?string $name): void
     {
         $this->name = $name;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): void
+    {
+        $this->lastName = $lastName;
     }
 
     public function getJob(): ?string

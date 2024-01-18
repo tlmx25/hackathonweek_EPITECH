@@ -26,4 +26,4 @@ RUN composer update
 
 EXPOSE 8000
 
-CMD ["symfony", "server:start", "--no-tls", "--port=8080"]
+CMD ["./setup.sh"]

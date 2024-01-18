@@ -22,5 +22,3 @@ getAgencies:
 getInfoByAgency:
     path: /infos/agency/{agency}
     controller: App\Controller\InfosController:getInfosByAgency
-postMemberInformation:
-    path: /info
