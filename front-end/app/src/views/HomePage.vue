@@ -4,7 +4,7 @@
         <IntroText style="margin-top: 8rem;"/>
         <div class="row">
             <div class="col-md-3" style="margin-top: 4rem;">
-                <SearchBar @searchChange="updateSearch"/>
+                <SearchBar @searchChange="updateSearch" :users="users"/>
                 <FilterCards :teams="teams" @filterChange="updateFilters"/>
             </div>
             <div class="col">
