@@ -25,7 +25,6 @@ services:
             - backend/.env
         volumes:
             - ./symfony:/var/www/html
-
     front:
         build:
             context: ./front-end/app
@@ -35,7 +34,6 @@ services:
         restart: unless-stopped
         ports:
             - "8080:8080"
-
 networks:
     mon_projet_net:
         driver: bridge
