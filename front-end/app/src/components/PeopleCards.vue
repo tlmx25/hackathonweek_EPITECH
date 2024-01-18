@@ -12,7 +12,7 @@
           <img v-else :src="user.funImage ? user.funImage : noPicture" class="card-img-top" :class="{ 'flipped': flippedCards.includes(index) }" alt="...">
           <div class="card-overlay"  v-if="hoveredIndex === index">
             <div v-if="!flippedCards.includes(index)">
-              <p class="card-title" style="font-weight: bold;">{{ user.lastName }} {{ user.name }}</p>
+              <p class="card-title" style="font-weight: bold;">{{ user.name }} {{ user.lastName }}</p>
               <p class="card-text">{{ user.job }}</p>
             </div>
             <div v-else>

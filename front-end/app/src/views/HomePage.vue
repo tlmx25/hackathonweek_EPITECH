@@ -49,15 +49,19 @@ export default {
         this.users = await fetchData('/infos');
         this.filteredUsers = [...this.users];
       },
+
       updateSearch(search) {
+        let temp;
+
         if (search && search.search.trim() != '') {
-            this.filteredUsers = this.filteredUsers.filter(user => user.lastName.toLowerCase().includes(search.search.toLowerCase()) ||
-                user.name.toLowerCase().includes(search.search.toLowerCase()));
+            temp = this.users.filter(user => user.name.toLowerCase().startsWith(search.search.toLowerCase()) ||
+                user.lastName.toLowerCase().startsWith(search.search.toLowerCase()) || search.search.toLowerCase() == user.name.toLowerCase() + ' ' + user.lastName.toLowerCase());
+            this.filteredUsers = temp;
         } else {
             this.filteredUsers = [...this.users];
-            // TODO : if other filters applied ???
         }
       },
+
       updateFilters(filters) {
         if (filters.teams.length === 0 && (filters.cities.length === 0 || filters.cities.length === 2)) {
             this.filteredUsers = [...this.users];

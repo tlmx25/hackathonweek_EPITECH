@@ -29,6 +29,7 @@
       return {
         searchInput: '',
         suggestions: [],
+        searchContainer: null,
       };
     },
     computed: {
@@ -43,25 +44,28 @@
       },
       startSearch() {
         this.$emit('searchChange', {
-          search: this.searchInput,
+            search: this.searchInput,
         });
       },
       selectSuggestion(user) {
         this.searchInput = `${user.name} ${user.lastName}`;
         this.suggestions = [];
-        this.startSearch();
+        this.$emit('searchChange', {
+            search: this.searchInput,
+        });
       },
       closeSuggestions(event) {
-        if (!this.$refs.searchContainer.contains(event.target)) {
+        if (this.searchContainer && this.$refs.searchContainer && !this.$refs.searchContainer.contains(event.target)) {
           this.suggestions = [];
         }
       },
     },
     mounted() {
-      document.addEventListener('click', this.closeSuggestions);
+        this.searchContainer = this.$refs.searchContainer;
+        document.addEventListener('click', this.closeSuggestions);
     },
     destroy() {
-      document.removeEventListener('click', this.closeSuggestions);
+        document.removeEventListener('click', this.closeSuggestions);
     },
   };
   </script>
