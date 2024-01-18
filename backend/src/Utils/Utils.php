@@ -13,13 +13,13 @@ class Utils {
                 "id" => $elem->getId(),
                 "name" => $elem->getName(),
                 "lastName" => $elem->getLastName(),
-                "job" => strtolower(trim($elem->getJob())),
-                "team" => strtolower(trim($elem->getTeam())),
-                "agency" => strtolower(trim($elem->getAgency())),
+                "job" => trim($elem->getJob()),
+                "team" => trim($elem->getTeam()),
+                "agency" => trim($elem->getAgency()),
                 "proImage" => $elem->getProImage(),
                 "funImage" => $elem->getFunImage(),
             ];
-            if (trim($transformedElem[$field]) == strtolower($fieldToCompare))
+            if (strtolower(trim($transformedElem[$field])) == strtolower(trim($fieldToCompare)))
                 $filteredData[] = $transformedElem;
             $index++;
         }
@@ -37,9 +37,9 @@ class Utils {
                 "id" => $elem->getId(),
                 "name" => $elem->getName(),
                 "lastName" => $elem->getLastName(),
-                "job" => strtolower(trim($elem->getJob())),
-                "team" => strtolower(trim($elem->getTeam())),
-                "agency" => strtolower(trim($elem->getAgency())),
+                "job" => trim($elem->getJob()),
+                "team" => trim($elem->getTeam()),
+                "agency" => trim($elem->getAgency()),
                 "proImage" => $elem->getProImage(),
                 "funImage" => $elem->getFunImage(),
             ];
