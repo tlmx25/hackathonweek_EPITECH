@@ -9,6 +9,9 @@
   <template v-if="selectedElement == 'Home'">
     <AdminHome />
   </template>
+  <template v-if="selectedElement == 'User'">
+    <UserHandling />
+  </template>
   </div>
   </div>
 </template>
@@ -16,7 +19,8 @@
 <script>
 import '@/assets/css/main.scss';
 import TheCard from "@/components/admin/TheCard.vue";
-import AdminHome from "@/components/admin/TheAdminHome.vue"
+import AdminHome from "@/components/admin/TheAdminHome.vue";
+import UserHandling from "@/components/admin/TheUserHandling.vue";
 import SideBar from "@/components/ui/TheSidebar.vue";
 import TopBar from "@/components/ui/TheTopbar.vue";
 import { mapState } from "vuex";
@@ -24,9 +28,10 @@ import { mapState } from "vuex";
 export default {
   components: {
     TheCard,
-    AdminHome,
     SideBar,
     TopBar,
+    AdminHome,
+    UserHandling
   },
   methods: {
     handleElementSelected(elem) {

@@ -3,7 +3,7 @@
       <div class="container-fluid d-flex justify-content-between align-items-center">
         <a class="navbar-brand ms-3" style="font-size: 1.8rem;">Back Office</a>
         <div class="text-end">
-          <div><span style="font-size: 1.2rem;">quentinbollore@gmail.com</span></div>
+          <div><span style="font-size: 1.2rem;">admin</span></div>
           <div><span class="badge bg-success">Administrateur</span></div>
         </div>
       </div>

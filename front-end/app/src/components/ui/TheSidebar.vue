@@ -10,11 +10,11 @@
         </div>
         <div class="container" role="button"  @click="changeElem('Trombi')" :class="{ 'selected': isSelected === 'Trombi' }">
           <span class="material-symbols-outlined me-3">photo_library</span>
-          <span to="/admin/trombi" style="margin-top: 3px">Trombinoscope</span>
+          <span style="margin-top: 3px">Trombinoscope</span>
         </div>
-        <div class="container" role="button"  @click="changeElem('About')" :class="{ 'selected': isSelected === 'About' }">
+        <div class="container" role="button"  @click="changeElem('User')" :class="{ 'selected': isSelected === 'About' }">
           <span class="material-symbols-outlined me-3">model_training</span>
-          <span style="margin-top: 3px">A propos</span>
+          <span style="margin-top: 3px">Gestion utilisateurs</span>
         </div>
       </div>
     </div>
