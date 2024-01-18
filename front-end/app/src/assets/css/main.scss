@@ -49,33 +49,6 @@
 .transparent {background-color: transparent;}
 
 .invisible {display: none;}
-
-h1, h2, h3, h4, h5, p {
-  color: var(--gray-900);
-  font-weight: 500;
-}
-
-h1 {
-  font-size: 1.5rem;
-}
-
-h2 {
-  font-size: 1.3rem;
-}
-
-h3 {
-  font-size: 1.1rem;
-}
-
-hr {
-  color: var(--gray-500);
-  margin: 0 auto;
-}
-
-body {
-    margin: 0;
-    font-family: "Lato", sans-serif;
-  }
   
   .sidebar {
     margin: 0;
