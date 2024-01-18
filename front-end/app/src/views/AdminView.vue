@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import '@/assets/css/main.scss';
 import TheCard from "@/components/admin/TheCard.vue";
 import AdminHome from "@/components/admin/TheAdminHome.vue"
 import SideBar from "@/components/ui/TheSidebar.vue";

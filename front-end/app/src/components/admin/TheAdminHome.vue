@@ -17,7 +17,7 @@ import AllGraph from "./TheAllGraph.vue"
 import PieGraph from "./ThePieGraph.vue"
 import CurvedGraph from "./TheCurvedGraph.vue"
 import axios from 'axios'
-//import { fetchData } from "@/services/api";
+import { fetchData } from "@/services/api";
 
 export default {
     components: {
@@ -34,12 +34,10 @@ export default {
         }
     },
     methods: {
-        /*async fetchUsers() {
-            const users = await fetchData('infos', {
-                methods = "GET"
-            });
+        async fetchUsers() {
+            const users = await fetchData('infos');
             this.users = users;
-        },*/
+        },
         async fetchUser() {
         axios.defaults.baseURL = 'http://localhost:8000/';
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token'); 
@@ -52,6 +50,7 @@ export default {
         }
     },
     mounted() {
+        this.fetchUsers();
         this.fetchUser();
     }
 }

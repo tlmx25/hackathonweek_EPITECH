@@ -1,4 +1,5 @@
 <template>
+    <NavBar />
     <div class="container mt-5">
         <IntroText style="margin-top: 8rem;"/>
         <div class="row">
@@ -15,6 +16,7 @@
 
 <script>
 
+import NavBar from '@/components/NavBar.vue'
 import PeopleCards from '@/components/PeopleCards.vue'
 import FilterCards from '@/components/FilterCards.vue'
 import SearchBar from '@/components/SearchBar.vue';
@@ -27,7 +29,8 @@ export default {
         PeopleCards,
         FilterCards,
         SearchBar,
-        IntroText
+        IntroText,
+        NavBar
     },
     data() {
         return {
